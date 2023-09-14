@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Button predict;
     ImageView camera,gallery, leftIcon, rightIcon, selectedImage;
     int imageSize = 256;
+    String classe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         gallery = findViewById(R.id.imgBtnGaleria);
         predict = findViewById(R.id.buttonEnviar);
         selectedImage = findViewById(R.id.selectedimage);
-        about = findViewById(R.id.textViewSobre);
+        about = findViewById(R.id.textViewInformations);
         about.setVisibility(View.INVISIBLE);
     }
 
@@ -98,6 +99,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, InformationActivity.class);
+                intent.putExtra("class", classe);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void classifyImage(Bitmap image){
@@ -139,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             String[] classes = {"Acne", "Rosácea", "Impetigo", "Melasma", "Psoríase", "Micose", "Dermatite Atópica", "Melanoma"};
             result.setText(classes[maxPos]);
             about.setVisibility(View.VISIBLE);
+            classe = classes[maxPos];
 
             model.close();
         } catch (IOException e) {

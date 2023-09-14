@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradiente"
+    tools:context=".InformationActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#0E3C42">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/left_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="visible"
+                    tools:visibility="invisible"
+                    android:src="@drawable/ic_arrowback"/>
+                <TextView
+                    android:id="@+id/textClasse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/name_app"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/left_icon"
+                    />
+                <ImageView
+                    android:id="@+id/right_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_menu"/>
+
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <ScrollView
+        android:id="@+id/scrollable"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="O que é:"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="wkjfwekflkfnvsekgrdlgergkjerngkjerngkrengkrengrengergnekrgnergnerngerlmergmerlgertl,erth,trçlh,trçh,trçh,çrt,rtyçmrtophfihwefiuwenfwefewfwefgergrgetrhterregergherheherrelgjerglergergopjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwepogmwepovmpoerer,j.tijgoegieagagmalkmgaermgopermagparemgmreagpmerapgmreaopmbaepombapeormpoeamboprembopeambroepambeopbmomeaopbmeropbmeapobmeap~lbmaeboaneopñeabopaembpemrbpmbramerpbmaroebmroeerabarlkfnvsekjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwepogmwepovmpoerer,j.tijgoegieagagmalkmgaermgopermagparemgmreagpmerapgmreaopmbaepombapeormpoeamboprembopeambroepambeopbmomeaopbmeropbmeapobmeap~lbmaeboaneopñeabopaembpemrbpmbramerpbmaroebmroeerabarlkfnvsekjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwerdngl"
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cuidados: "
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="kfhwekufwegrlgkerlgmerlgmerger,goper,ger,g,gtphk,portb,rtpb,rtpb.prthn.lpr´n,rtojheiruhgjsdhbvnsdghnwesuivodijvbnidvndovndoisdmghgehrthrthtrhtrwhtwrhrtwhrthrthtehtrekgopermgoermoirenbeomgeroinerbrmepolbmerpob,erpo,erpo,eopb,erbpfjweewrpgoiergoer"
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Saiba mais: "
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="fewwpoef"
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="feswfwpeofkmpwef"
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fonte: "
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

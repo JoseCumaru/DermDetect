@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#14464C"
+    android:background="@drawable/gradiente"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
@@ -42,7 +42,7 @@
                         android:layout_marginStart="1dp"
                         android:text="DermDetect"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="18sp"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@id/left_icon"
                         />
@@ -68,10 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
-            android:background="#14464C"
             android:padding="5dp"
             android:layout_marginStart="8dp"
-            android:text="Os resultados fornecidos são apenas uma estimativa. É altamente recomendado que você consulte um médico para um diagnóstico preciso."
+            android:text="@string/information"
             android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
@@ -103,10 +102,11 @@
                     android:layout_gravity="left"
                     android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="30dp"/>
+                    android:layout_marginStart="30dp"
+                    tools:ignore="RtlHardcoded" />
 
                 <TextView
-                    android:id="@+id/textViewSobre"
+                    android:id="@+id/textViewInformations"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Informações>"
@@ -129,7 +129,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:background="#14464C"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -184,7 +183,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="left"
                     android:layout_marginStart="60dp"
-                    android:text="Camera"
+                    android:text="@string/camera"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="MissingConstraints,RtlHardcoded" />
@@ -194,7 +193,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="right"
                     android:layout_marginEnd="64dp"
-                    android:text="Galeria"
+                    android:text="@string/gallery"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:ignore="MissingConstraints,RtlHardcoded" />
@@ -207,7 +206,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Inferir"
+                android:text="@string/infer"
+                android:textSize="19sp"
                 android:textAllCaps="false"
                 app:backgroundTint="@null" />
 

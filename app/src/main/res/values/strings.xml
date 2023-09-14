@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TesteDermDetect</string>
+    <string name="gallery">Galeria</string>
+    <string name="camera">Camera</string>
+    <string name="infer">Inferir</string>
+    <string name="information">Os resultados fornecidos são apenas uma estimativa. É altamente recomendado que você consulte um médico para um diagnóstico preciso.</string>
+    <string name="string_melanoma">Melanoma</string>
+    <string name="name_app">DermDetect</string>
 </resources>
