@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="@string/config"
+        android:icon="@drawable/ic_conifg"
+        android:id="@+id/item_config" />
+    <item
+        android:title="@string/historic"
+        android:icon="@drawable/ic_history"
+        android:id="@+id/item_history" />
+
+    <item
+        android:title="@string/about"
+        android:icon="@drawable/ic_about"
+        android:id="@+id/item_about" />
+
+</menu>

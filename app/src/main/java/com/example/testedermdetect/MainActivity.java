@@ -2,8 +2,11 @@ package com.example.testedermdetect;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,9 +14,13 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.testedermdetect.ml.Model;
@@ -32,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView camera,gallery, leftIcon, rightIcon, selectedImage;
     int imageSize = 256;
     String classe;
+    PopupMenu popupMenu;
+    MenuBuilder.ItemInvoker itemConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void initializeComponents(){
         leftIcon = findViewById(R.id.left_icon);
         rightIcon = findViewById(R.id.right_icon);
+
         toolbarTitle = findViewById(R.id.toolbar_title);
         result = findViewById(R.id.textResult);
         //confidence = findViewById(R.id.confidence);
@@ -56,7 +67,48 @@ public class MainActivity extends AppCompatActivity {
         selectedImage = findViewById(R.id.selectedimage);
         about = findViewById(R.id.textViewInformations);
         about.setVisibility(View.INVISIBLE);
+        itemConfig = findViewById(R.id.item_config);
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_itens, menu); // Infla o menu a partir do arquivo menu.xml
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.right_icon) {
+            // Criar e exibir o PopupMenu aqui
+            PopupMenu popupMenu = new PopupMenu(this, findViewById(R.id.right_icon));
+            popupMenu.inflate(R.menu.menu_itens);
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    // Realizar ação de acordo com a opção selecionada
+                    switch (item.getOrder()) {
+                        case 1:
+                            // Ações para configurações
+                            break;
+                        case 2:
+                            // Ações para histórico
+                            break;
+                        case 3:
+                            // Ações para sobre
+                            break;
+                    }
+                    return true;
+                }
+            });
+
+            // Mostrar o popupMenu
+            popupMenu.show();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void initializeClicks(){
         camera.setOnClickListener(new View.OnClickListener() {
@@ -95,19 +147,44 @@ public class MainActivity extends AppCompatActivity {
         rightIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(MainActivity.this, rightIcon);
+                popupMenu.getMenuInflater().inflate(R.menu.menu_itens, popupMenu.getMenu());
 
+                // Configure um ouvinte de clique de item de menu
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        // Lide com o clique no item de menu aqui
+                        switch (item.getItemId()) {
+                            case 1:
+                                // Ação para o Item 1
+                                return true;
+                            case 2:
+                                // Ação para o Item 2
+                                return true;
+                            // Adicione mais casos conforme necessário
+                            case  3:
+                            default:
+                                return false;
+                        }
+                    }
+                });
+
+                // Exiba o menu
+                popupMenu.show();
             }
         });
+
+
 
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, InformationActivity.class);
-                intent.putExtra("class", classe);
+                intent.putExtra("class","  " + classe);
                 startActivity(intent);
             }
         });
-
     }
 
     public void classifyImage(Bitmap image){
