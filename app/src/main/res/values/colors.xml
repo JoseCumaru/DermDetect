@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- App Defaults Colors -->
     <color name="color_cinza">#C6C6C6</color>
     <color name="primary_color">#004453</color>
     <color name="secundary_color">#18525A</color>
 
+    <color name="primary_blue">#066B97</color>
+    <color name="secundary_blue">#63BDD1</color>
+
+    <!-- Instagram Colors -->
+    <color name="insta_start_top">#6D11FF</color>
+    <color name="insta_end_bottom">#FF0093</color>
+    <color name="insta_start_bottom">#FFCC00</color>
+    <color name="insta_gradiente" tools:ignore="ReferenceType">@drawable/insta_gradiente</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
 </resources>

@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.testedermdetect'
+    namespace 'com.example.dermdetect'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.testedermdetect"
+        applicationId "com.example.dermdetect"
         minSdk 29
         targetSdk 33
         versionCode 1
@@ -28,6 +28,7 @@ android {
     }
     buildFeatures {
         mlModelBinding true
+        viewBinding true
     }
 }
 

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradiente"
-    tools:context=".InformationActivity">
+    android:background="@color/white"
+    tools:context=".ui.InformationActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primary_color">
+            android:background="@drawable/gradiente_blue">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -75,21 +75,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="O que é:"
+                android:text="Descrição:"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="19sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="wkjfwekflkfnvsekgrdlgergkjerngkjerngkrengkrengrengergnekrgnergnerngerlmergmerlgertl,erth,trçlh,trçh,trçh,çrt,rtyçmrtophfihwefiuwenfwefewfwefgergrgetrhterregergherheherrelgjerglergergopjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwepogmwepovmpoerer,j.tijgoegieagagmalkmgaermgopermagparemgmreagpmerapgmreaopmbaepombapeormpoeamboprembopeambroepambeopbmomeaopbmeropbmeapobmeap~lbmaeboaneopñeabopaembpemrbpmbramerpbmaroebmroeerabarlkfnvsekjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwepogmwepovmpoerer,j.tijgoegieagagmalkmgaermgopermagparemgmreagpmerapgmreaopmbaepombapeormpoeamboprembopeambroepambeopbmomeaopbmeropbmeapobmeap~lbmaeboaneopñeabopaembpemrbpmbramerpbmaroebmroeerabarlkfnvsekjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwerdngl"
-                android:textColor="@color/white"
+                android:text="rlmuggremgoepambeopbmomeaopbmeropbmeapobmeap~lbmaeboaneopñeabopaembpemrbpmbramerpbmaroebmroeerabarlkfnvsekjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwepogmwepovmpoerer,j.tijgoegieagagmalkmgaermgopermagparemgmreagpmerapgmreaopmbaepombapeormpoeamboprembopeambroepambeopbmomeaopbmeropbmeapobmeap~lbmaeboaneopñeabopaembpemrbpmbramerpbmaroebmroeerabarlkfnvsekjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwerdngl"
+                android:textColor="@color/black"
                 android:textSize="19sp"/>
 
             <TextView
@@ -97,28 +98,30 @@
                 android:layout_height="wrap_content"
                 android:text="Cuidados: "
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="19sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="kfhwekufwegrlgkerlgmerlgmerger,goper,ger,g,gtphk,portb,rtpb,rtpb.prthn.lpr´n,rtojheiruhgjsdhbvnsdghnwesuivodijvbnidvndovndoisdmghgehrthrthtrhtrwhtwrhrtwhrthrthtehtrekgopermgoermoirenbeomgeroinerbrmepolbmerpob,erpo,erpo,eopb,erbpfjweewrpgoiergoer"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="19sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Saiba mais em: "
-                android:textColor="@color/white"
+                android:text="Tratamento: "
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="19sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fonte: "
-                android:textColor="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="19sp"/>
 
         </LinearLayout>

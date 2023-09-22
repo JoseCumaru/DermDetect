@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <gradient
+        android:startColor="@color/insta_end_bottom"
+        android:centerColor="@color/insta_start_bottom"
+        android:endColor="@color/insta_start_top"
+        android:type="sweep"
+        />
+
+</shape>

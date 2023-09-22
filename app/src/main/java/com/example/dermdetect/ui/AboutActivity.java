@@ -1,35 +1,32 @@
-package com.example.testedermdetect;
+package com.example.dermdetect.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
-public class InformationActivity extends AppCompatActivity {
-    TextView textClasse, informations;
+import com.example.dermdetect.R;
+
+public class AboutActivity extends AppCompatActivity {
+
     ImageView leftIcon, rightIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information);
+        setContentView(R.layout.activity_about);
+
         initializeComponents();
         initializeClicks();
+
     }
 
-    private void initializeComponents(){
-        Intent intent = getIntent();
-        String classe = intent.getStringExtra("class");
-        textClasse = findViewById(R.id.textClasse);
-        textClasse.setText(classe);
+    private void initializeComponents() {
         leftIcon = findViewById(R.id.left_icon);
         rightIcon = findViewById(R.id.right_icon);
-
     }
 
     private void initializeClicks(){
@@ -42,7 +39,7 @@ public class InformationActivity extends AppCompatActivity {
         rightIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(InformationActivity.this, rightIcon);
+                PopupMenu popupMenu = new PopupMenu(AboutActivity.this, rightIcon);
                 popupMenu.getMenuInflater().inflate(R.menu.menu_itens, popupMenu.getMenu());
 
                 // Configure um ouvinte de clique de item de menu

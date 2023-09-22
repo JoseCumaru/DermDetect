@@ -1,4 +1,4 @@
-package com.example.testedermdetect;
+package com.example.dermdetect;
 
 import android.content.Context;
 
