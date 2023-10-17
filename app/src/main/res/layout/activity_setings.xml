@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    style="@style/background"
     tools:context=".ui.SetingsActivity"
     android:fillViewport="true">
 
@@ -17,7 +17,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradiente_blue">
+            style="@style/toolbar">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -31,14 +31,16 @@
                     android:layout_centerVertical="true"
                     android:visibility="visible"
                     tools:visibility="invisible"
-                    android:src="@drawable/ic_arrowback"/>
+                    android:src="@drawable/ic_arrowback"
+                    style="@style/icons" />
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:paddingEnd="25dp"
                     android:text="@string/config"
-                    android:textColor="@color/black"
+                    style="@style/text"
                     android:textSize="18sp"
                     android:layout_centerVertical="true" />
                 <ImageView
@@ -61,7 +63,9 @@
         android:id="@+id/contrainDadosPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="30dp"
         android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:layout_constraintBottom_toTopOf="@+id/LinearConfig"
         tools:ignore="MissingConstraints">
@@ -71,18 +75,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_profile"
+            style="@style/perfil"
             android:src="@drawable/ic_person"
             android:padding="6dp"
             app:layout_constraintStart_toStartOf="@+id/contrainDadosPerfil"
             app:layout_constraintEnd_toEndOf="@+id/contrainDadosPerfil"/>
 
         <TextView
-            android:id="@+id/nomeUser"
+            android:id="@+id/nameUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jose"
+            android:text=""
             android:textSize="18sp"
-            android:layout_marginTop="8dp"
+            style="@style/text"
+            android:layout_marginTop="12dp"
             app:layout_constraintTop_toBottomOf="@+id/imgPerfil"
             app:layout_constraintEnd_toEndOf="@+id/contrainDadosPerfil"
             app:layout_constraintStart_toStartOf="@+id/contrainDadosPerfil"
@@ -98,8 +104,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:padding="16dp"
+        android:background="@android:color/transparent"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/contrainDadosPerfil"
 
@@ -107,63 +114,82 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:id="@+id/textEditPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:drawableStart="@drawable/ic_edit"
             android:drawablePadding="8dp"
             android:text="Editar perfil"
             android:textSize="18sp"
+            style="@style/text"
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/textProblem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:drawableStart="@drawable/ic_report"
             android:drawablePadding="8dp"
             android:text="Reportar um problema"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            style="@style/text"
+            android:layout_marginTop="24dp"/>
 
-        <TextView
+        <Switch
+            android:id="@+id/Switcher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_logout"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_apparence"
             android:drawablePadding="8dp"
-            android:text="Aparencia"
+            android:text="Modo escuro"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            style="@style/text"
+            android:layout_marginTop="24dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <TextView
+            android:id="@+id/textPrivacy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:drawableStart="@drawable/ic_security"
             android:drawablePadding="8dp"
             android:text="Privacidade e segurança"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            style="@style/text"
+            android:layout_marginTop="24dp"/>
 
         <TextView
+            android:id="@+id/textSupport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_logout"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_support"
             android:drawablePadding="8dp"
             android:text="Ajuda e suporte"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            style="@style/text"
+            android:layout_marginTop="24dp"/>
 
         <TextView
+            android:id="@+id/textSignOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:drawableStart="@drawable/ic_signout"
             android:drawablePadding="8dp"
             android:text="Sign out"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            style="@style/text"
+            android:layout_marginTop="24dp"/>
 
 
 

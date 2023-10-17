@@ -43,18 +43,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="bottom"
                 tools:ignore="UselessParent">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/name"
+                    android:text="@string/complete_name"
                     android:textSize="16sp"
                     style="@style/text"/>
 
                 <EditText
-                    android:id="@+id/editNome"
+                    android:id="@+id/editNomeP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -68,12 +68,60 @@
                     android:textSize="16sp"
                     style="@style/text"/>
 
+
                 <EditText
-                    android:id="@+id/editEmail"
+                    android:id="@+id/editEmailP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:hint="email@email.com"/>
+
+                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Telefone para contato"
+                android:textSize="16sp"
+                style="@style/text"/>
+
+                <EditText
+                    android:id="@+id/editContactPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:hint="ex: (00) 00000-0000"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Especializaçao"
+                    android:textSize="16sp"
+                    style="@style/text"/>
+
+                <Spinner
+                    android:id="@+id/spinnerEspecializationP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:inputType="text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Licença Profissional"
+                    android:textSize="16sp"
+                    style="@style/text"/>
+
+                <EditText
+                    android:id="@+id/editLicenseP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:hint="ex: MD-123456"/>
+
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -84,40 +132,21 @@
                     style="@style/text"/>
 
                 <EditText
-                    android:id="@+id/editPassword"
+                    android:id="@+id/editPasswordP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:hint="*********"/>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/textRegisterP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="É um profissional?"
-                    style="@style/text"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="MissingConstraints" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    android:hint="*********"
+                    />
 
                 <Button
                     android:id="@+id/btnRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
                     android:text="Registrar"
-                    style="@style/button"/>
-
+                    style="@style/button"
+                    />
 
             </LinearLayout>
 

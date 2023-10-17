@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    style="@style/background"
     tools:context=".ui.InformationActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradiente_blue">
+            style="@style/toolbar">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -35,12 +35,12 @@
                     android:id="@+id/textClasse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:paddingEnd="20dp"
                     android:text="@string/name_app"
-                    android:textColor="@color/black"
+                    style="@style/text"
                     android:textSize="18sp"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/left_icon"
+                    android:layout_centerHorizontal="true"
                     />
                 <ImageView
                     android:id="@+id/right_icon"
@@ -49,6 +49,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
+                    android:visibility="invisible"
                     android:src="@drawable/ic_menu"/>
 
             </RelativeLayout>
@@ -79,54 +80,75 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descrição:"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:paddingEnd="15dp"
+                android:text="@string/descrition"
                 android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="19sp"/>
+                style="@style/description_drawable"
+                android:drawablePadding="5dp"
+                android:textSize="24sp"/>
 
             <TextView
+                android:id="@+id/textDescrition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="rlmuggremgoepambeopbmomeaopbmeropbmeapobmeap~lbmaeboaneopñeabopaembpemrbpmbramerpbmaroebmroeerabarlkfnvsekjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwepogmwepovmpoerer,j.tijgoegieagagmalkmgaermgopermagparemgmreagpmerapgmreaopmbaepombapeormpoeamboprembopeambroepambeopbmomeaopbmeropbmeapobmeap~lbmaeboaneopñeabopaembpemrbpmbramerpbmaroebmroeerabarlkfnvsekjfhesnkesnfsekjfnsekgnwekngrsmvsrklmgremgopekgwepgfkmwerdngl"
-                android:textColor="@color/black"
-                android:textSize="19sp"/>
+                android:text=""
+                style="@style/text"
+                android:textSize="18sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cuidados: "
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal"
+                android:paddingEnd="15dp"
+                android:text="@string/symptons"
                 android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="19sp"/>
+                style="@style/symptons_drawable"
+                android:drawablePadding="5dp"
+                android:textSize="24sp"/>
 
             <TextView
+                android:id="@+id/textSymptons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="kfhwekufwegrlgkerlgmerlgmerger,goper,ger,g,gtphk,portb,rtpb,rtpb.prthn.lpr´n,rtojheiruhgjsdhbvnsdghnwesuivodijvbnidvndovndoisdmghgehrthrthtrhtrwhtwrhrtwhrthrthtehtrekgopermgoermoirenbeomgeroinerbrmepolbmerpob,erpo,erpo,eopb,erbpfjweewrpgoiergoer"
-                android:textColor="@color/black"
-                android:textSize="19sp"/>
+                android:text=""
+                style="@style/text"
+                android:textSize="18sp"/>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tratamento: "
-                android:textColor="@color/black"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal"
+                android:paddingEnd="15dp"
+                android:text="@string/treatment"
+                style="@style/treatment_drawable"
+                android:drawablePadding="5dp"
                 android:textStyle="bold"
-                android:textSize="19sp"/>
-
+                android:textSize="24sp"/>
             <TextView
+                android:id="@+id/textTreatment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fonte: "
-                android:textColor="@color/black"
+                android:text=""
+                style="@style/text"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/textCM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text=" "
+                style="@style/text"
                 android:textStyle="bold"
-                android:textSize="19sp"/>
+                android:textSize="24sp"/>
 
         </LinearLayout>
-
-
 
     </ScrollView>
 

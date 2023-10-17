@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- App Defaults Colors -->
+    <!-- App Defaults Light Colors -->
+
     <color name="color_cinza">#C6C6C6</color>
     <color name="primary_color">#004453</color>
     <color name="secundary_color">#18525A</color>
+    <color name="cinza">#454545</color>
 
-    <color name="primary_blue">#066B97</color>
-    <color name="secundary_blue">#63BDD1</color>
+    <!-- Dark Colors -->
+    <color name="black_fsc">#373636</color>
+    <color name="blue_fsc">#113245</color>
+
+    <color name="toolbar_blue">#08587E</color>
+    <color name="primary_blue">#3C9ABD</color>
+    <color name="secundary_blue">#5AABC5</color>
+    <color name="terc_blue">#74B5C6</color>
 
     <!-- Instagram Colors -->
     <color name="insta_start_top">#6D11FF</color>

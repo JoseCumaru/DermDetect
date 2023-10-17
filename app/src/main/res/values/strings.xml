@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TesteDermDetect</string>
+    <string name="app_name">DermDetect</string>
     <string name="gallery">Galeria</string>
     <string name="camera">Câmera</string>
     <string name="infer">Inferir</string>
@@ -18,6 +18,8 @@
     <string name="information">Os resultados fornecidos são apenas uma estimativa. É altamente recomendado que você consulte um médico para um diagnóstico preciso.</string>
     <string name="developed_by">Desenvolvido por</string>
     <string name="title_activity_login">LoginActivity</string>
+
+    <!-- Auth Strings -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -26,5 +28,104 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="name">Nome</string>
+
+    <!-- Informations Strings -->
+    <string name="symptons">Sintomas</string>
+    <string name="treatment">Tratamento</string>
+    <string name="descrition">Descrição</string>
+
+    <!-- Acne -->
+    <string name="acne_description">Condição de pele que ocorre quando os folículos capilares são obstruídos por óleo e células mortas da pele. A acne é mais comum em adolescentes e jovens. Os sintomas variam de simples cravos a espinhas cheias de pus ou grandes caroços vermelhos e sensíveis.</string>
+    <string name="acne_symptons">Geralmente autodiagnosticável. Os sintomas variam de simples cravos a espinhas cheias de pus ou grandes caroços vermelhos e sensíveis.</string>
+    <string name="acne_treatment">Conforme o grau e a intensidade da acne, o tratamento se dá por via oral ou local, dependendo de uma avaliação criteriosa do dermatologista. Os tratamentos disponíveis para a acne, portanto, incluem cremes, géis, sabonetes e antibióticos orais, além da isotretinoína.</string>
+    <string name="acne_cm"> Muito Comum</string>
+
+    <!-- Rosacea -->
+    <string name="rosacea_description">Uma condição que provoca vermelhidão e, muitas vezes, inchaços pequenos, vermelhos e cheios de pus no rosto.
+A rosácea costuma afetar as mulheres de meia-idade com pele clara. Pode ser confundida com acne ou outros problemas de pele.</string>
+    <string name="rosacea_symptons">Os principais sintomas são vermelhidão facial com caroços vermelhos inchados e pequenos vasos sanguíneos visíveis.</string>
+    <string name="rosacea_treatment">Tratamentos como antibióticos ou medicamentos anti-acne podem controlar e reduzir os sintomas. Se não receber tratamento, tende a piorar com o tempo.</string>
+    <string name="rosacea_cm"> Muito Comum</string>
+
+    <!-- Impetigo -->
+    <string name="impetigo_description">Impetigo é uma infecção cutânea, altamente contagiosa, causada por dois diferentes germes: o Staphylococcus aureus, uma bactéria gram-positiva, com o formato aproximado de um cacho de uva, que pode formar colônias na pele e nas narinas de pessoas saudáveis, e o Streptococcus pyogenes (estreptococos beta-hemolíticos do grupo A) que habita normalmente nossa pele, boca e trato respiratório superior.</string>
+    <string name="impetigo_symptons">O principal sintoma são feridas vermelhas que se formam ao redor do nariz e da boca. As feridas se rompem, exsudam durante alguns dias e, em seguida, formam uma crosta amarelo-amarronzada.</string>
+    <string name="impetigo_treatment">Antibióticos reduzem a infecção e podem ajudar a evitar a propagação a outras pessoas.</string>
+    <string name="impetigo_cm"> Muito Comum</string>
+
+    <!-- Melasma -->
+    <string name="melasma_description">Melasma é uma hiperpigmentação da pele, decorrente da deposição aumentada de melanina, proteína que garante a coloração da pele e evita os danos da radiação ultravioleta no DNA. O transtorno resulta na formação de manchas castanho-escuras ou marrom-acinzentadas, com limites bem demarcados, mas formato irregular. Embora se localizem preferencialmente na face, na região das maçãs do rosto, da testa, do lábio superior, no queixo e nas têmporas, as lesões também podem surgir no colo, pescoço e antebraços. O tamanho das manchas pode variar bastante. Em alguns casos, elas chegam a tomar as duas faces completamente.</string>
+    <string name="melasma_symptons">Sua principal característica é o aparecimento de máculas hiperpigmentadas (manchas escuras), planas e sem crostas, nas regiões do corpo expostas à radiação ultravioleta. De formato irregular, mas bem delimitado, em geral, essas manchas formam placas, que se distribuem simetricamente dos dois lados do rosto. A intensidade da coloração, mais clara ou mais escura, varia de acordo com a quantidade de melanina acumulada na pele.</string>
+    <string name="melasma_treatment">Além da aplicação sistemática do protetor solar de amplo espectro, o tratamento do melasma inclui o uso tópico de agentes que promovem o clareamento gradual das manchas causadas pela produção excessiva de melanina.</string>
+    <string name="melasma_cm"> Comum</string>
+
+    <!-- Psoriase -->
+    <string name="psoriase_description">Psoríase é uma doença inflamatória da pele, crônica, não contagiosa, multigênica (vários genes envolvidos), com incidência genética em cerca de 30% dos casos. Caracteriza-se por lesões avermelhadas e descamativas, normalmente em placas, que aparecem, em geral, no couro cabeludo, cotovelos e joelhos.</string>
+    <string name="psoriase_symptons">De acordo com a localização e características das lesões, existem vários tipos de psoríase:
+
+\n    -Psoríase vulgar: lesões de tamanhos variados, delimitadas e avermelhadas, com escamas secas, aderentes, prateadas ou acinzentadas que surgem no couro cabeludo, joelhos e cotovelos;
+\n    -Psoríase invertida: lesões mais úmidas, localizadas em áreas de dobras como couro cabeludo, joelhos e cotovelos;
+\n    -Psoríase gutata: pequenas lesões localizadas, em forma de gotas, associadas a processos infecciosos. Geralmente, aparecem no tronco, braços e coxas (bem próximas aos ombros e quadril) e ocorrem com maior frequência em crianças e adultos jovens;
+\n    -Psoríase eritrodérmica: lesões generalizadas em 75% ou mais do corpo;
+\n    -Psoríase ungueal: surgem depressões puntiformes ou manchas amareladas principalmente nas unhas da mãos;
+\n    -Psoríase artropática: em cerca de 8% dos casos, pode estar associada a comprometimento articular. Surge de repente com dor nas pontas dos dedos das mãos e dos pés ou nas grandes articulações como a do joelho.
+\n    -Psoríase postulosa: aparecem lesões com pus nos pés e nas mãos (forma localizada) ou espalhadas pelo corpo;
+\n    -Psoríase palmo-plantar: as lesões aparecem como fissuras nas palmas das mãos e solas dos pés.</string>
+    <string name="psoriase_treatment">Psoríase não tem cura, tem tratamento. Não há como prevenir a doença, embora seja possível controlar a reincidência.
+
+Casos leves e moderados (cerca de 80%) podem ser controlados com o uso de medicação local, hidratação da pele e exposição ao sol. Para quem não tem tempo para exposições diárias ao sol, são preconizados banhos de ultravioleta A e B em clínicas especializadas e sob rigorosa orientação médica. Esses banhos não são recomendados para crianças.</string>
+    <string name="psoriase_cm"> Muito Comum</string>
+
+    <!-- Micose -->
+    <string name="micose_description">São infecções provocadas pelo crescimento excessivo de fungos e que podem afetar a pele, o couro cabeludo, as unhas e áreas mais úmidas do corpo. Os fungos estão presentes em todas as pessoas, mas o desenvolvimento das micoses está ligado a fatores como, sistema imunológico enfraquecido, consumo excessivo de açúcar ou alergias.</string>
+    <string name="micose_symptons">Coceira, inflamação ou descamação da pele
+Manchas brancas ou amarronzadas
+Vermelhidão
+Rachadura entre os dedos
+Unhas deformadas e amareladas
+
+Leia mais em: https://saude.abril.com.br/medicina/o-que-e-micose-causas-sintomas-e-tratamentos</string>
+    <string name="micose_treatment">O tratamento vai depender do tipo de micose e deve ser determinado por um médico dermatologista. Podem ser usadas medicações locais sob a forma de cremes, loções e talcos ou medicações via oral, dependendo da intensidade do quadro. O tratamento das micoses é sempre prolongado, variando de cerca de 30 a 60 dias. Não o interrompa assim que terminarem os sintomas, pois o fungo nas camadas mais profundas pode resistir. Continue o uso da medicação pelo tempo indicado pelo seu médico.</string>
+    <string name="micose_cm"> Comum</string>
+    
+    <!-- Dermatite Atopica -->
+    <string name="dermatite_description">É uma doença crônica e hereditária que causa inflamação da pele, levando ao aparecimento de lesões e coceira. Não é contagiosa e sua causa exata é desconhecida.
+
+A dermatite atópica costuma ocorrer entre pessoas da mesma família, juntamente com a asma ou a rinite alérgica. Pode surgir ou ser desencadeada por substâncias que provocam reações alérgicas, como as presentes nos pelos de animais de estimação; condições ambientais, como roupas que provocam coceira; ou emoções, como o estresse.</string>
+    <string name="dermatite_symptons">A característica principal da doença é a pele seca com coceira constante, que pode provocar ferimentos pelo ato de coçar-se.
+
+Áreas secas em placas salientes ou com descamação, principalmente nas dobras da pele.
+
+Em crianças e bebês, aparece geralmente no rosto, nos cotovelos ou nos joelhos e possivelmente em outras regiões do corpo.
+
+Em crianças maiores e em adultos, as lesões localizam-se menos no rosto e mais nas dobras do corpo, como pescoço, cotovelo, atrás do joelho, mãos e tornozelos. São áreas mais secas, escuras e grossas e, em casos mais graves, pode acometer boa parte do corpo.</string>
+    <string name="dermatite_treatment">Existem diversos medicamentos que ajudam no controle da doença. Há pomadas ou cremes muito eficazes no controle da dermatite atópica que, no entanto, devem ser indicadas e usadas corretamente, com acompanhamento médico, para evitar efeitos colaterais a longo prazo.</string>
+    <string name="dermatite_cm">Muito Comum</string>
+    
+    <!-- Melanoma -->
+    <string name="melanoma_description">O câncer de pele melanoma tem origem nos melanócitos (células produtoras de melanina, substância que determina a cor da pele) e é mais frequente em adultos brancos. O melanoma pode aparecer em qualquer parte do corpo, na pele ou mucosas, na forma de manchas, pintas ou sinais. Nos indivíduos de pele negra, ele é mais comum nas áreas claras, como palmas das mãos e plantas dos pés.
+
+Embora o câncer de pele seja o mais frequente no Brasil e corresponda a cerca de 30% de todos os tumores malignos registrados no país, o melanoma representa apenas 4% das neoplasias malignas do órgão. É o tipo mais grave, devido à sua alta possibilidade de provocar metástase (disseminação do câncer para outros órgãos).</string>
+    <string name="melanoma_symptons">Em geral, todos os tipos de melanoma são caracterizados por manchas, pintas ou sinais. Nesse ponto, é importante observar características como:
+
+Assimetrias e contorno irregular;
+
+Muito escuras ou com diversas cores;
+
+Maiores que meio centímetro;
+
+Tenham surgido e crescido rapidamente;
+
+Mudaram de características;
+
+Coçam ou sangram.</string>
+    <string name="melanoma_treatment">O tratamento depende do estágio e características do câncer. Pode ser necessário o tratamento cirúrgico e/ou radioterapia, quimioterapia, imunoterapia e uso de drogas alvo, de acordo com o perfil molecular da doença. </string>
+    <string name="melanoma_cm">Comum</string>
+
+
+    <string name="complete_name">Nome completo</string>
 
 </resources>

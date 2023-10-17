@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/gradiente_blue"
     tools:context=".ui.AboutActivity"
     android:fillViewport="true">
 
@@ -18,7 +18,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradiente_blue">
+                android:background="@color/toolbar_blue">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                     <ImageView
                         android:id="@+id/left_icon"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="50dp"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:visibility="visible"
@@ -37,8 +37,8 @@
                         android:id="@+id/toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
                         android:text="@string/about"
+                        android:paddingEnd="20dp"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:layout_centerVertical="true"
@@ -72,15 +72,20 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintBottom_toTopOf="@+id/LinearInfGraph"/>
 
     <LinearLayout
         android:id="@+id/LinearInfGraph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/textDescrition"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints">
 
         <ImageView
@@ -119,10 +124,13 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/LinearInfGraph"
         app:layout_constraintBottom_toTopOf="@+id/LinearDevBy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"
         >
 
@@ -166,7 +174,6 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -188,11 +195,12 @@
 
     </ScrollView>
 
+    <!--
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/LinearDevBy"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/gradiente_blue"
+        android:background="@color/toolbar_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -242,6 +250,8 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    -->
 
 
 

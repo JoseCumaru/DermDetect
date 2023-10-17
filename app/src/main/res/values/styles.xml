@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="PopupMenuStyle" parent="@style/Widget.AppCompat.PopupMenu">
-        <item name="android:popupBackground">@color/secundary_blue</item>
+        <item name="android:popupBackground">@color/white</item>
     </style>
 
     <style name="GradientStyleBlue">

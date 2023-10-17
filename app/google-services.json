@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "941747110796",
+    "project_id": "dermdetect-9121b",
+    "storage_bucket": "dermdetect-9121b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941747110796:android:34d60c5b93430e05d18ca9",
+        "android_client_info": {
+          "package_name": "com.example.dermdetect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr-iGOUncam8tN67gJPJ9B5pM4U0cgtBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

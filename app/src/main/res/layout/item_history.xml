@@ -1,0 +1,69 @@
+<!-- item_history.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:layout_marginTop="5dp">
+
+    <ImageView
+        android:id="@+id/imageHistory"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="5dp"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_gravity="left"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textDisease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            style="@style/text"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/textConfidence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/text"
+            android:layout_marginTop="1dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/text"
+            android:layout_marginTop="22dp"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right">
+        <ImageView
+            android:id="@+id/imgItemDelete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/ic_delete"
+            android:layout_marginBottom="5dp"
+             />
+    </LinearLayout>
+
+
+</LinearLayout>
