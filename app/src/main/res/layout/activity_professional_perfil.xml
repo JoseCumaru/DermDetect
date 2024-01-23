@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:paddingEnd="25dp"
-                    android:text="@string/config"
+                    android:text="Profissional"
                     style="@style/text"
                     android:textSize="18sp"
                     android:layout_centerVertical="true" />
@@ -68,12 +68,13 @@
         android:layout_height="120dp"
         android:layout_marginTop="32dp"
         android:background="@android:color/transparent"
-        style="@style/cardview"
+        android:backgroundTint="@color/blue_fsc"
         app:cardCornerRadius="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/nameUser"
+        app:layout_constraintBottom_toTopOf="@+id/LinearDescriptionProfessional"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        >
 
         <ImageView
             android:id="@+id/imgPerfil"
@@ -83,108 +84,128 @@
             android:src="@drawable/ic_person"
             app:cardCornerRadius="50dp" />
 
-
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/nameUser"
+        android:id="@+id/nameProfessional"
         style="@style/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text=""
-        android:textSize="18sp"
+        android:text="Profissional 1"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardImgPerfil"
-        app:layout_constraintBottom_toTopOf="@+id/LinearConfig"/>
+        app:layout_constraintTop_toBottomOf="@+id/cardImgPerfil" />
 
     <LinearLayout
-        android:id="@+id/LinearConfig"
+        android:id="@+id/LinearDescriptionProfessional"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="64dp"
         android:padding="16dp"
         android:background="@android:color/transparent"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/nameUser"
+        app:layout_constraintTop_toBottomOf="@+id/cardImgPerfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textEditPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:drawablePadding="8dp"
-            android:text="Editar perfil"
-            android:textSize="18sp"
-            style="@style/edit_perfil"
-            app:drawableStartCompat="@drawable/ic_edit" />
+            android:text="Descrição"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textProblem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:drawablePadding="8dp"
-            android:text="Reportar um problema"
-            android:textSize="18sp"
-            style="@style/report"
-            android:layout_marginTop="24dp"
-            app:drawableStartCompat="@drawable/ic_report" />
-
-        <Switch
-            android:id="@+id/Switcher"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:drawableStart="@drawable/ic_apparence"
-            android:drawablePadding="8dp"
-            android:text="Modo escuro"
-            android:textSize="18sp"
-            style="@style/night_mode"
-            android:layout_marginTop="24dp"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/textPrivacy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:drawablePadding="8dp"
-            android:text="Privacidade e segurança"
-            android:textSize="18sp"
-            style="@style/privacy"
-            android:layout_marginTop="24dp"
-            app:drawableStartCompat="@drawable/ic_security" />
+            android:layout_marginTop="16dp"
+            android:text="Contato"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textSupport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:drawablePadding="8dp"
-            android:text="Ajuda e suporte"
+            android:layout_marginTop="5dp"
+            android:text="E-mail:"
             android:textSize="18sp"
-            style="@style/help"
-            android:layout_marginTop="24dp"
-            app:drawableStartCompat="@drawable/ic_support" />
+            android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textSignOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:drawablePadding="8dp"
-            android:text="Sign out"
+            android:text="p1@gmail.com"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Telefone:"
             android:textSize="18sp"
-            style="@style/sign_out"
-            android:layout_marginTop="24dp"
-            app:drawableStartCompat="@drawable/ic_signout" />
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(00) 00000-0000"
+            android:textSize="18sp"/>
+
+
 
 
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/textViewSolicitarConsulta"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/bg_button"
+            android:backgroundTint="@color/toolbar_blue"
+            android:gravity="center"
+            android:text=" Solicitar consulta "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textViewWhatsapp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/textViewWhatsapp"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/bg_button"
+            android:backgroundTint="#31AF36"
+            android:gravity="center"
+            android:text=" Whatsapp "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewSolicitarConsulta"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

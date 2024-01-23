@@ -31,15 +31,14 @@ public class SplashActivity extends AppCompatActivity {
     private final Timer timer = new Timer();
     TimerTask timerTask;
     private FirebaseFirestore db;
-   
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkNightMode();
-        db = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_splash);
-     
+        db = FirebaseFirestore.getInstance();
 
         timerTask = new TimerTask() {
             @Override
@@ -74,7 +73,10 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intentL);
             finish();
         } else {
+            //Coleta o ID do usuário
             String userID = currentUser.getUid();
+
+            //Verifica o tipo de usuario
             Task<Integer> roleTask = verifyUserType(userID);
 
             roleTask.addOnCompleteListener(new OnCompleteListener<Integer>() {
@@ -94,7 +96,10 @@ public class SplashActivity extends AppCompatActivity {
                             }
                         }
                     } else {
-                        Toast.makeText(SplashActivity.this, "Erro ao obter dados", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SplashActivity.this, "Erro ao obter dados do usuário, tente novamente", Toast.LENGTH_SHORT).show();
+                        Intent intentL = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(intentL);
+                        finish();
                     }
                 }
             });
@@ -102,20 +107,20 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public Task<Integer> verifyUserType(String userID) {
-        // Construa a referência ao documento do usuário com base no ID de usuário
+        // Constroi a referência ao documento do usuário com base no ID de usuário
         DocumentReference userRef = db.collection("Users").document(userID);
 
-        // Realize uma consulta para obter o valor do campo "role" no documento do usuário
+        // Realiza uma consulta para obter o valor do campo "role" no documento do usuário
         return userRef.get().continueWith(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    // Obtenha o valor do campo "role" como um inteiro
+                    // Obtem o valor do campo "role" como um inteiro
                     Integer role = document.getLong("role").intValue();
                     return role;
                 }
             }
-            // Se o documento não existe ou ocorreu um erro, retorne null ou um valor padrão
+            // Se o documento não existe ou ocorreu um erro, retorna null ou um valor padrão
             return null;
         });
     }

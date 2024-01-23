@@ -2,26 +2,47 @@ package com.example.dermdetect.ui;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dermdetect.R;
 import com.example.dermdetect.auth.LoginActivity;
+import com.example.dermdetect.viewmodels.HistoryItem;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class SetingsActivity extends AppCompatActivity {
 
@@ -31,7 +52,7 @@ public class SetingsActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-    ImageView leftIcon, rightIcon;
+    ImageView leftIcon, rightIcon, imgPerfil;
     FirebaseAuth auth;
     FirebaseFirestore firestore;
 
@@ -43,8 +64,40 @@ public class SetingsActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
         initializeComponents();
+        setImgPerfil();
         initializeClicks();
         setNightMode();
+
+
+
+    }
+
+    private void setImgPerfil(){
+        String userId = auth.getCurrentUser().getUid();
+        DocumentReference documentReference = firestore.collection("Users").document(userId);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                if (documentSnapshot != null) {
+                    String imageBase64 = documentSnapshot.getString("imgperfil");
+                    String nameUser = documentSnapshot.getString("name");
+                    textNomeUser.setText(nameUser);
+                    if (imageBase64 != null && !imageBase64.isEmpty()) {
+                        Bitmap imageBitmap = decodeBase64ToBitmap(imageBase64);
+                        if (imageBitmap != null) {
+                            imgPerfil.setImageBitmap(imageBitmap);
+                        } else {
+                            Toast.makeText(SetingsActivity.this, "Erro ao decodificar imagem do perfil", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        //Toast.makeText(SetingsActivity.this, "Lembre-se de carregar um foto de perfil", Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {
+                    Toast.makeText(SetingsActivity.this, "Erro ao buscar o documento: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void setNightMode(){
@@ -81,18 +134,9 @@ public class SetingsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        String userId = auth.getCurrentUser().getUid();
-        DocumentReference documentReference = firestore.collection("Users").document(userId);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                if(documentSnapshot != null){
-                    textNomeUser.setText(documentSnapshot.getString("name"));
-                }
-            }
-        });
 
     }
+
 
     private void initializeComponents() {
         leftIcon = findViewById(R.id.left_icon);
@@ -100,6 +144,7 @@ public class SetingsActivity extends AppCompatActivity {
         textSignOut = findViewById(R.id.textSignOut);
         textNomeUser = findViewById(R.id.nameUser);
         switcher = findViewById(R.id.Switcher);
+        imgPerfil =findViewById(R.id.imgPerfil);
     }
 
     private void initializeClicks(){
@@ -107,6 +152,7 @@ public class SetingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                finish();
             }
         });
         rightIcon.setOnClickListener(new View.OnClickListener() {
@@ -149,5 +195,105 @@ public class SetingsActivity extends AppCompatActivity {
                 startActivity(intentL);
             }
         });
+
+        imgPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(cameraIntent,2);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && data != null) {
+            Uri dat = data.getData();
+            Bitmap image = null;
+
+            try {
+                image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), dat);
+            } catch (IOException e) {
+                // Lide com erros ao carregar a imagem
+                Toast.makeText(SetingsActivity.this, "Erro ao carregar a imagem: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (image != null) {
+                imgPerfil.setImageBitmap(image);
+
+                // Converter a imagem em um array de bytes (byte[])
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] imageData = baos.toByteArray();
+
+                List<Byte> imageBytesList = new ArrayList<>();
+                for (byte b : imageData) {
+                    imageBytesList.add(b);
+                }
+
+                String base64ImageData = Base64.encodeToString(imageData, Base64.DEFAULT);
+
+
+                // Salvar a imagem no Firestore e atualizar o campo imgperfil
+                String userID = auth.getCurrentUser().getUid();
+                firestore = FirebaseFirestore.getInstance();
+                DocumentReference userRef = firestore.collection("Users").document(userID);
+
+                // Primeiro, verifique se o documento do usuário existe
+                userRef.get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                if (!task.getResult().exists()) {
+                                    // O documento do usuário não existe, então vamos criá-lo
+                                    Map<String, Object> userData = new HashMap<>();
+                                    userData.put("imgperfil", base64ImageData);
+                                    userRef.set(userData)
+                                            .addOnSuccessListener(aVoid -> {
+                                                // Documento do usuário criado com sucesso
+                                                // Agora, podemos atualizar o campo "imgperfil"
+                                                userRef.update("imgperfil", base64ImageData)
+                                                        .addOnSuccessListener(aVoid2 -> {
+                                                            // Sucesso, a imagem foi salva no Firestore
+                                                            Toast.makeText(SetingsActivity.this, "Imagem de perfil salva com sucesso", Toast.LENGTH_SHORT).show();
+                                                        })
+                                                        .addOnFailureListener(e2 -> {
+                                                            // Lidar com erros ao salvar a imagem
+                                                            Toast.makeText(SetingsActivity.this, "Erro ao salvar imagem de perfil: " + e2.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        });
+                                            })
+                                            .addOnFailureListener(e1 -> {
+                                                // Lidar com erros ao criar o documento do usuário
+                                                Toast.makeText(SetingsActivity.this, "Erro ao criar documento do usuário: " + e1.getMessage(), Toast.LENGTH_SHORT).show();
+                                            });
+                                } else {
+                                    // O documento do usuário já existe, então apenas atualize o campo "imgperfil"
+                                    userRef.update("imgperfil", base64ImageData)
+                                            .addOnSuccessListener(aVoid -> {
+                                                // Sucesso, a imagem foi salva no Firestore
+                                                Toast.makeText(SetingsActivity.this, "Imagem de perfil atualizada com sucesso", Toast.LENGTH_SHORT).show();
+                                            })
+                                            .addOnFailureListener(e2 -> {
+                                                Toast.makeText(SetingsActivity.this, "Erro ao salvar imagem de perfil: " + e2.getMessage(), Toast.LENGTH_SHORT).show();
+                                            });
+                                }
+                            } else {
+                                Toast.makeText(SetingsActivity.this, "Erro ao verificar o documento do usuário: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        }
+    }
+
+    private static Bitmap decodeBase64ToBitmap(String base64) {
+        byte[] decodedBytes = Base64.decode(base64, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="estados_array">
+        <item>Amazonas</item>
+        <item>Acre</item>
+        <item>Pará</item>
+        <item>São paulo</item>
+        <!-- Adicione mais estados conforme necessário -->
+    </string-array>
+
+    <string-array name="cidades_amazonas_array">
+        <item>Coari</item>
+        <item>Humaitá</item>
+        <item>Itacoatiara</item>
+        <item>Maués</item>
+        <item>Manacapuru</item>
+        <item>Manaus</item>
+        <item>Parintins</item>
+        <item>São Gabriel da Cachoeira</item>
+        <item>Tabatinga</item>
+        <item>Tefé</item>
+
+        <!-- Adicione mais cidades para o State 1 conforme necessário -->
+    </string-array>
+
+    <string-array name="cidades_acre_array">
+        <item>Brasiléia</item>
+        <item>Cruzeiro do Sul</item>
+        <item>Feijó</item>
+        <item>Jordão</item>
+        <item>Mâncio Lima</item>
+        <item>Marechal Thaumaturgo</item>
+        <item>Plácido de Castro</item>
+        <item>Porto Acre</item>
+        <item>Rio Branco</item>
+        <item>Sena Madureira</item>
+        <!-- Adicione mais cidades para o State 2 conforme necessário -->
+    </string-array>
+
+    <string-array name="cidades_para_array">
+        <item>Abaetetuba</item>
+        <item>Altamira</item>
+        <item>Ananindeua</item>
+        <item>Belém</item>
+        <item>Castanhal</item>
+        <item>Itaituba</item>
+        <item>Marabá</item>
+        <item>Paragominas</item>
+        <item>Santarém</item>
+        <item>Tucuruí</item>
+
+    </string-array>
+
+</resources>

@@ -18,9 +18,40 @@
         <item name="android:background">@color/blue_fsc</item>
     </style>
 
-    <style name="perfil">
-        <item name="android:backgroundTint">@color/cinza</item>
+    <!-- Settings Activity -->
+
+
+    <style name="edit_perfil">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:drawableTint">@color/white</item>
     </style>
+
+    <style name="report">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:drawableTint">@color/white</item>
+    </style>
+
+    <style name="night_mode">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:drawableTint">@color/white</item>
+    </style>
+
+    <style name="privacy">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:drawableTint">@color/white</item>
+    </style>
+
+    <style name="help">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:drawableTint">@color/white</item>
+    </style>
+
+    <style name="sign_out">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:drawableTint">@color/white</item>
+    </style>
+
+
 
     <style name="button">
         <item name="android:backgroundTint">@color/blue_fsc</item>
@@ -38,6 +69,16 @@
     <style name="icons">
         <item name="tint">@color/white</item>
     </style>
+
+    <style name="cardview">
+        <item name="android:backgroundTint">@color/blue_fsc</item>
+    </style>
+
+    <style name="image_cardview">
+        <item name="android:src">@drawable/ic_imageempty_white</item>
+    </style>
+
+
 
     <!-- Informations Activity -->
     <style name="description_drawable">

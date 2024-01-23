@@ -19,6 +19,7 @@
     <string name="developed_by">Desenvolvido por</string>
     <string name="title_activity_login">LoginActivity</string>
 
+
     <!-- Auth Strings -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -31,6 +32,9 @@
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="name">Nome</string>
+
+    <string name="select_state">Select State</string>
+    <string name="select_city">Select City</string>
 
     <!-- Informations Strings -->
     <string name="symptons">Sintomas</string>
@@ -90,7 +94,7 @@ Unhas deformadas e amareladas
 Leia mais em: https://saude.abril.com.br/medicina/o-que-e-micose-causas-sintomas-e-tratamentos</string>
     <string name="micose_treatment">O tratamento vai depender do tipo de micose e deve ser determinado por um médico dermatologista. Podem ser usadas medicações locais sob a forma de cremes, loções e talcos ou medicações via oral, dependendo da intensidade do quadro. O tratamento das micoses é sempre prolongado, variando de cerca de 30 a 60 dias. Não o interrompa assim que terminarem os sintomas, pois o fungo nas camadas mais profundas pode resistir. Continue o uso da medicação pelo tempo indicado pelo seu médico.</string>
     <string name="micose_cm"> Comum</string>
-    
+
     <!-- Dermatite Atopica -->
     <string name="dermatite_description">É uma doença crônica e hereditária que causa inflamação da pele, levando ao aparecimento de lesões e coceira. Não é contagiosa e sua causa exata é desconhecida.
 
@@ -104,7 +108,7 @@ Em crianças e bebês, aparece geralmente no rosto, nos cotovelos ou nos joelhos
 Em crianças maiores e em adultos, as lesões localizam-se menos no rosto e mais nas dobras do corpo, como pescoço, cotovelo, atrás do joelho, mãos e tornozelos. São áreas mais secas, escuras e grossas e, em casos mais graves, pode acometer boa parte do corpo.</string>
     <string name="dermatite_treatment">Existem diversos medicamentos que ajudam no controle da doença. Há pomadas ou cremes muito eficazes no controle da dermatite atópica que, no entanto, devem ser indicadas e usadas corretamente, com acompanhamento médico, para evitar efeitos colaterais a longo prazo.</string>
     <string name="dermatite_cm">Muito Comum</string>
-    
+
     <!-- Melanoma -->
     <string name="melanoma_description">O câncer de pele melanoma tem origem nos melanócitos (células produtoras de melanina, substância que determina a cor da pele) e é mais frequente em adultos brancos. O melanoma pode aparecer em qualquer parte do corpo, na pele ou mucosas, na forma de manchas, pintas ou sinais. Nos indivíduos de pele negra, ele é mais comum nas áreas claras, como palmas das mãos e plantas dos pés.
 

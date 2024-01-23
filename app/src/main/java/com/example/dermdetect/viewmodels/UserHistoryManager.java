@@ -1,15 +1,17 @@
-package com.example.dermdetect.ui;
+package com.example.dermdetect.viewmodels;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import com.example.dermdetect.viewmodels.HistoryItem;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.ByteArrayOutputStream;
@@ -60,22 +62,22 @@ public class UserHistoryManager {
     }
 
     public static Task<List<HistoryItem>> getHistory() {
-        // Verifique se o usuário está autenticado
+        // Verifica se o usuário está autenticado
         if (auth.getCurrentUser() != null) {
-            // Obtenha o ID do usuário atual
+            // Obtem o ID do usuário atual
             String userId = auth.getCurrentUser().getUid();
 
-            // Acesse a coleção de histórico do usuário atual
+            // Acessa a coleção de histórico do usuário atual
             CollectionReference historyRef = firestore.collection("Users").document(userId).collection("History");
 
-            // Execute a consulta para obter todos os documentos na coleção
-            return historyRef.get().continueWith(task -> {
+            // Executa a consulta para obter todos os documentos na coleção
+            return historyRef.orderBy("timestamp", Query.Direction.DESCENDING).get().continueWith(task -> {
                 if (task.isSuccessful()) {
                     List<HistoryItem> historyList = new ArrayList<>();
 
-                    // Itere sobre os documentos recuperados
+                    // Itera sobre os documentos recuperados
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        // Converta cada documento em um objeto HistoryItem
+                        // Converte cada documento em um objeto HistoryItem
                         String imageBase64 = document.getString("image");
                         String detectedDisease = document.getString("detectedDisease");
                         double confidence = document.getDouble("confidence");
@@ -85,7 +87,7 @@ public class UserHistoryManager {
 
                         HistoryItem historyItem = new HistoryItem(imageBitmap, detectedDisease, confidence, timestamp);
 
-                        // Adicione o objeto HistoryItem à lista
+                        // Adiciona o objeto HistoryItem à lista
                         historyList.add(historyItem);
                     }
 
@@ -96,13 +98,13 @@ public class UserHistoryManager {
                 }
             });
         } else {
-            // O usuário não está autenticado, retorne uma lista vazia ou lidere com isso de acordo com sua lógica
+            // O usuário não está autenticado, retorna uma lista vazia ou lidere com isso de acordo com sua lógica
             return Tasks.forResult(new ArrayList<HistoryItem>());
         }
     }
+
     private static Bitmap decodeBase64ToBitmap(String base64) {
         byte[] decodedBytes = Base64.decode(base64, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
-
 }

@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +27,14 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText editNome, editEmail, editPassword;
-
+    EditText editName, editEmail, editPassword;
+    String spinnerStateContent, spinnerCityContent;
     TextView goToRegisterP;
     Button buttonRegister;
-
+    Spinner spinnerState, spinnerCity;
     FirebaseAuth auth;
     FirebaseFirestore firestore;
+    AuthManager authManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +45,88 @@ public class RegisterActivity extends AppCompatActivity {
 
         initializeComponents();
         initializeClicks();
-
-
+        initializeSpinners();
     }
 
     private void initializeComponents(){
-        editNome = findViewById(R.id.editNome);
+        editName = findViewById(R.id.editName);
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         buttonRegister = findViewById(R.id.btnRegister);
         goToRegisterP = findViewById(R.id.textRegisterP);
+        spinnerState = findViewById(R.id.spinnerEstate);
+        spinnerCity = findViewById(R.id.spinnerCity);
+
+        authManager = new AuthManager();
     }
 
-    private void initializeClicks(){
+    private void initializeSpinners(){
+        ArrayAdapter<CharSequence> estadosAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.estados_array,
+                android.R.layout.simple_spinner_item
+        );
+        estadosAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerState.setAdapter(estadosAdapter);
 
+        // Defina um ouvinte de seleção para o Spinner de estado
+        spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String spinnerContent = parentView.getItemAtPosition(position).toString();
+                spinnerStateContent = spinnerContent;
+                updateCidadesAdapter(spinnerCity, position);
+                spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                        String spinnerContent = parentView.getItemAtPosition(position).toString();
+                        spinnerCityContent = spinnerContent;
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parentView) {
+                        // quando nada é selecionado
+                    }
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Não é necessário fazer nada aqui
+            }
+        });
+    }
+    private void updateCidadesAdapter(Spinner spinnerCidade, int estadoPosition) {
+        int cidadesArrayResourceId;
+        switch (estadoPosition) {
+            case 0:
+                cidadesArrayResourceId = R.array.cidades_amazonas_array;
+                break;
+            case 1:
+                cidadesArrayResourceId = R.array.cidades_acre_array;
+                break;
+            case 2:
+                cidadesArrayResourceId = R.array.cidades_para_array;
+                break;
+            // Adicione mais casos conforme necessário
+            default:
+                cidadesArrayResourceId = R.array.cidades_amazonas_array; // Padrão para o exemplo
+        }
+
+        // Cria o adaptador para o Spinner de cidade com base no array de cidades
+        ArrayAdapter<CharSequence> cidadesAdapter = ArrayAdapter.createFromResource(
+                this,
+                cidadesArrayResourceId,
+                android.R.layout.simple_spinner_item
+        );
+        cidadesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // adaptador atualizado para o Spinner de cidade
+        spinnerCidade.setAdapter(cidadesAdapter);
+    }
+
+
+    private void initializeClicks(){
         goToRegisterP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,65 +144,21 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void checkData(){
-        if(editNome.getText().equals("")){
+        if(editName.getText().equals("") && editEmail.getText().equals("") && editPassword.getText().equals("")){
+            Toast.makeText(RegisterActivity.this, "Insira seus dados", Toast.LENGTH_SHORT).show();
+        }else if(editName.getText().equals("")){
             Toast.makeText(RegisterActivity.this, "Insira seu nome", Toast.LENGTH_SHORT).show();
         } else if(editEmail.getText().equals("")){
             Toast.makeText(RegisterActivity.this, "Insira seu email", Toast.LENGTH_SHORT).show();
         } else if (editPassword.getText().equals("")) {
             Toast.makeText(RegisterActivity.this, "Insira sua senha", Toast.LENGTH_SHORT).show();
         }else{
-            registerUser();
+            authManager.registerUser(RegisterActivity.this, spinnerStateContent, spinnerCityContent, editEmail, editPassword, editName);
         }
     }
 
-    private void registerUser(){
-        String editEmailContent = editEmail.getText().toString().trim();
-        String editPasswordContent = editPassword.getText().toString().trim();
-        auth.createUserWithEmailAndPassword(editEmailContent, editPasswordContent).addOnCompleteListener(cadastro ->{
-            if(cadastro.isSuccessful()){
-                saveDates();
-                Toast.makeText(RegisterActivity.this,"Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
-                Intent intentM = new Intent(this, HomeActivity.class);
-                startActivity(intentM);
-                finish();
-            }else{
-                String erro;
-                try{
-                    throw cadastro.getException();
-                } catch (FirebaseAuthWeakPasswordException e){
-                    erro = "Digite uma senha com no minimo 6 caracteres";
-                    Toast.makeText(RegisterActivity.this, erro, Toast.LENGTH_SHORT).show();
-                } catch (FirebaseAuthUserCollisionException e){
-                    erro = "essa conta ja foi cadastrada";
-                    Toast.makeText(RegisterActivity.this,erro, Toast.LENGTH_SHORT).show();
-                } catch (FirebaseAuthInvalidCredentialsException e){
-                    erro = "email invalido";
-                    Toast.makeText(RegisterActivity.this,erro, Toast.LENGTH_SHORT).show();
-                }
-                catch (Exception e) {
-                    erro = "erro ao cadastrar usuario";
-                    Toast.makeText(RegisterActivity.this,erro, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
-
-    private void saveDates(){
-        String editNomeContent = editNome.getText().toString().trim();
-        String editEmailContent = editEmail.getText().toString().trim();
-        String editPasswordContent = editPassword.getText().toString().trim();
-        int role = 1;
-
-        Map<String,Object> usuarios = new HashMap<>();
-        usuarios.put("name",editNomeContent);
-        usuarios.put("email",editEmailContent);
-        usuarios.put("password",editPasswordContent);
-        usuarios.put("role", role);
-
-        String usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        DocumentReference documentReference = firestore.collection("Users").document(usuarioID);
-        documentReference.set(usuarios);
-    }
-
 }

@@ -5,7 +5,6 @@
     >
     <item
         android:title="@string/config"
-        android:background="@color/primary_color"
         android:icon="@drawable/ic_conifg"
         android:id="@+id/item_config" />
     <item

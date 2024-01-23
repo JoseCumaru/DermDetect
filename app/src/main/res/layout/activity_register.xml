@@ -9,7 +9,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:id="@+id/LinearImg"
@@ -17,7 +21,11 @@
             android:layout_height="wrap_content"
             android:padding="32dp"
             android:orientation="vertical"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/LinearData">
 
             <ImageView
                 android:layout_width="124dp"
@@ -26,24 +34,17 @@
                 android:layout_gravity="center_horizontal"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/LinearData1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:padding="8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
             <LinearLayout
                 android:id="@+id/LinearData"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:layout_gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/LinearImg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="UselessParent">
 
                 <TextView
@@ -54,7 +55,7 @@
                     style="@style/text"/>
 
                 <EditText
-                    android:id="@+id/editNome"
+                    android:id="@+id/editName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -90,6 +91,30 @@
                     android:inputType="textPassword"
                     android:hint="*********"/>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Cidade"
+                    android:textSize="16sp"
+                    style="@style/text"/>
+
+                <Spinner
+                    android:id="@+id/spinnerEstate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:prompt="@string/select_state"/>
+
+                <Spinner
+                    android:id="@+id/spinnerCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/select_city"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"/>
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,7 +144,6 @@
                     style="@style/button"/>
 
 
-            </LinearLayout>
 
         </LinearLayout>
 

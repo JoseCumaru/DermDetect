@@ -30,7 +30,8 @@
                     android:layout_centerVertical="true"
                     android:visibility="visible"
                     tools:visibility="invisible"
-                    android:src="@drawable/ic_arrowback"/>
+                    android:src="@drawable/ic_arrowback"
+                    style="@style/icons"/>
                 <TextView
                     android:id="@+id/textClasse"
                     android:layout_width="wrap_content"
@@ -76,13 +77,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 android:paddingEnd="15dp"
                 android:text="@string/descrition"
@@ -147,6 +148,166 @@
                 style="@style/text"
                 android:textStyle="bold"
                 android:textSize="24sp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewSugestions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:text="Sugestoes de profissionais"
+                    android:textSize="18sp"/>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewSugestions">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardProfileP1"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            app:cardCornerRadius="5dp"
+                            android:layout_marginEnd="5dp"
+                            style="@style/cardview"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/imgView1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="70dp"
+                                    android:background="@color/cinza"
+                                    android:src="@drawable/ic_person"
+                                    android:layout_gravity="center_horizontal" />
+
+                                <TextView
+                                    android:id="@+id/textViewNameP1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="P1"
+                                    android:textColor="@color/black"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/textViewEspecializationP1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Dermatoligista"
+                                    android:textColor="@color/black"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardProfileP2"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            app:cardCornerRadius="5dp"
+                            style="@style/cardview">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/imgView2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="70dp"
+                                    android:background="@color/cinza"
+                                    android:src="@drawable/ic_person"
+                                    android:layout_gravity="center_horizontal" />
+
+                                <TextView
+                                    android:id="@+id/textViewNameP2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="P2"
+                                    android:textColor="@color/black"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/textViewEspecializationP2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Dermatologista"
+                                    android:textColor="@color/black"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardProfileP3"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginStart="5dp"
+                            app:cardCornerRadius="5dp"
+                            style="@style/cardview"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/imgView3"
+                                    android:layout_width="match_parent"
+                                    android:background="@color/cinza"
+                                    android:layout_height="70dp"
+                                    android:src="@drawable/ic_person"
+                                    android:layout_gravity="center_horizontal" />
+
+                                <TextView
+                                    android:id="@+id/textViewNameP3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="P3"
+                                    android:textColor="@color/black"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/textViewEspecializationP3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Dermatologita"
+                                    android:textColor="@color/black"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 

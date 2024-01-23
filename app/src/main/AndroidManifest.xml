@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -29,6 +31,12 @@
         android:theme="@style/Theme.DermDetect"
         tools:targetApi="31">
         <activity
+            android:name=".ui.ChatUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ProfessionalPerfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.HistoryActivity"
             android:exported="false" />
         <activity
@@ -39,7 +47,8 @@
             android:exported="false" /> <!-- Auth Activities -->
         <activity
             android:name=".ui.HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".auth.RecoverActivity"
             android:exported="false" />
@@ -60,7 +69,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

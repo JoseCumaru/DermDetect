@@ -1,16 +1,19 @@
-package com.example.dermdetect.ui;
+package com.example.dermdetect.viewmodels;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dermdetect.R;
+import com.example.dermdetect.ui.HistoryActivity;
+import com.google.api.Context;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -31,18 +34,27 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        HistoryItem historyItem = historyItemList.get(position);
+        if (historyItemList.isEmpty()) {
 
-        // Exibir os dados do HistoryItem nos elementos da interface do usuário
-        holder.imageView.setImageBitmap(historyItem.getImageURL());
-        holder.diseaseTextView.setText(historyItem.getDetectedDisease());
-        holder.confidenceTextView.setText(String.format("%.2f%%", historyItem.getConfidence()));
+            holder.imageView.setImageDrawable(null);
+            holder.diseaseTextView.setText("");
+            holder.confidenceTextView.setText("");
+            holder.time.setText("");}
+        else{
+            HistoryItem historyItem = historyItemList.get(position);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy  -  HH:mm:ss", Locale.getDefault());
-        String formattedTimestamp = dateFormat.format(historyItem.getTimestamp());
-        holder.time.setText(formattedTimestamp);
+
+            holder.imageView.setImageBitmap(historyItem.getImageURL());
+            holder.diseaseTextView.setText(historyItem.getDetectedDisease());
+            holder.confidenceTextView.setText(String.format("%.2f%%", historyItem.getConfidence()));
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy  -  HH:mm:ss", Locale.getDefault());
+            String formattedTimestamp = dateFormat.format(historyItem.getTimestamp());
+            holder.time.setText(formattedTimestamp);
+        }
     }
 
     @Override

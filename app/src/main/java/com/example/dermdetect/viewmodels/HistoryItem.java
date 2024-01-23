@@ -1,4 +1,4 @@
-package com.example.dermdetect.ui;
+package com.example.dermdetect.viewmodels;
 
 import android.graphics.Bitmap;
 

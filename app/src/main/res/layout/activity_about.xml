@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradiente_blue"
+    style="@style/background"
     tools:context=".ui.AboutActivity"
     android:fillViewport="true">
 
@@ -18,7 +18,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/toolbar_blue">
+                style="@style/toolbar">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about"
                         android:paddingEnd="20dp"
-                        android:textColor="@color/black"
+                        style="@style/text"
                         android:textSize="18sp"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
@@ -66,9 +66,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:paddingLeft="5dp"
+        style="@style/text"
+
+        android:paddingLeft="10dp"
         android:text="@string/app_descrition"
-        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        app:layout_constraintBottom_toTopOf="@+id/Linear1"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/textDescrition"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,77 +124,96 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <LinearLayout
+        android:id="@+id/Linear1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/LinearInfGraph"
-        app:layout_constraintBottom_toTopOf="@+id/LinearDevBy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:layout_height="match_parent"
+            >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Input: "
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="25dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="O usuário fornece por meio da câmera do dispositivo ou selecionando uma imagem da galeria. Esta imagem é a entrada que será processada pela rede neural para determinar a possível doença de pele."
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="COMO FUNCIONA"
+                    android:gravity="center_horizontal"
+                    style="@style/text"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Entrada: "
+                    style="@style/text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="O usuário fornece por meio da câmera do dispositivo ou selecionando uma imagem da galeria. Esta imagem é a entrada que será processada pela rede neural para determinar a possível doença de pele."
+                    style="@style/text"
+                    android:textSize="16sp" />
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Convolução: "
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Processamento: "
+                    style="@style/text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="A convolução é a etapa-chave. Ela envolve a aplicação de filtros (também chamados de kernels) à imagem de entrada para extrair características relevantes. Os filtros são pequenas matrizes de peso que deslizam pela imagem de entrada e realizam operações matemáticas para realçar padrões, como bordas, texturas e formas."
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="A convolução é a etapa-chave. Ela envolve a aplicação de filtros (também chamados de kernels) à imagem de entrada para extrair características relevantes. Os filtros são pequenas matrizes de peso que deslizam pela imagem de entrada e realizam operações matemáticas para realçar padrões, como bordas, texturas e formas."
+                    style="@style/text"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Output: "
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Saida: "
+                    style="@style/text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="A saída da aplicação é a classificação da doença de pele com base na imagem de entrada. A CNN foi treinada previamente em um conjunto de dados de treinamento que continha imagens de várias doenças de pele, cada uma associada a uma classe específica. Durante o treinamento, a CNN aprendeu a extrair características discriminativas das imagens que ajudam na diferenciação das doenças."
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="A saída da aplicação é a classificação da doença de pele com base na imagem de entrada. A CNN foi treinada previamente em um conjunto de dados de treinamento que continha imagens de várias doenças de pele, cada uma associada a uma classe específica. Durante o treinamento, a CNN aprendeu a extrair características discriminativas das imagens que ajudam na diferenciação das doenças."
+                    style="@style/text"
+                    android:textSize="16sp" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </ScrollView>
+        </ScrollView>
+
+    </LinearLayout>
+
+
 
     <!--
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -244,14 +264,14 @@
                 app:flow_horizontalAlign="end"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textViewNome"
-                app:srcCompat="@drawable/ic_instagram" />
+                app:srcCompat="@drawable/ic_launcher" />
 
         </LinearLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout> -->
 
-    -->
+
 
 
 

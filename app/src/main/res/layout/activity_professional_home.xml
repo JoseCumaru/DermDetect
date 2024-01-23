@@ -57,7 +57,6 @@
                         style="@style/ic_menu"/>
                 </RelativeLayout>
 
-
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -67,20 +66,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="16dp"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Olá, "
-                android:textSize="16sp"
+                android:textSize="18sp"
                 style="@style/text"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jose"
-                android:textSize="16sp"
+                android:text="Boa tarde"
+                android:textSize="18sp"
                 style="@style/text"/>
 
         </LinearLayout>
@@ -95,33 +95,33 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <Button
                     android:id="@+id/buttonViewPatients"
+                    style="@style/button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ver Pacientes"
-                    style="@style/button"
-                    android:layout_marginTop="16dp"/>
+                    android:text="Ver Pacientes" />
 
                 <Button
                     android:id="@+id/buttonScheduleAppointment"
+                    style="@style/button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/button"
-                    android:text="Pendentes"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp"
+                    android:text="Pendentes" />
 
             </LinearLayout>
 
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

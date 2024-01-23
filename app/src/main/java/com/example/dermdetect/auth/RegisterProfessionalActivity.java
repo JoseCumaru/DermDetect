@@ -15,10 +15,12 @@ import android.widget.Toast;
 import com.example.dermdetect.R;
 import com.example.dermdetect.ui.HomeActivity;
 import com.example.dermdetect.ui.ProfessionalHomeActivity;
+import com.example.dermdetect.viewmodels.FirestoreHelp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -26,12 +28,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterProfessionalActivity extends AppCompatActivity {
-    EditText nameP, emailP, phoneP, licenseP, passwordP;
+    EditText nameP, emailP, passwordP, cpfP, phoneP, licenseP;
     Button buttonRegister;
     Spinner especializationP;
     FirebaseAuth auth;
     FirebaseFirestore firestore;
-    String especializacaoSelecionada;
+    String selectedEspecialization;
+    AuthManager authManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class RegisterProfessionalActivity extends AppCompatActivity {
     private void initializeComponents(){
         nameP = findViewById(R.id.editNomeP);
         emailP = findViewById(R.id.editEmailP);
+        passwordP = findViewById(R.id.editPasswordP);
+        cpfP = findViewById(R.id.editCpf);
         phoneP = findViewById(R.id.editContactPhone);
 
         especializationP = findViewById(R.id.spinnerEspecializationP);
@@ -53,11 +58,13 @@ public class RegisterProfessionalActivity extends AppCompatActivity {
         especializationP.setAdapter(adapter);
 
         licenseP = findViewById(R.id.editLicenseP);
-        passwordP = findViewById(R.id.editPasswordP);
+
         buttonRegister = findViewById(R.id.btnRegister);
 
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
+
+        authManager = new AuthManager();
     }
 
     private void initializeClicks(){
@@ -71,10 +78,8 @@ public class RegisterProfessionalActivity extends AppCompatActivity {
         especializationP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                especializacaoSelecionada = parentView.getItemAtPosition(position).toString();
-                // Faça algo com a especialização selecionada
+                selectedEspecialization = parentView.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
 
@@ -86,7 +91,8 @@ public class RegisterProfessionalActivity extends AppCompatActivity {
     private void checkData(){
         if (nameP.getText().equals("") || emailP.getText().equals("") || phoneP.getText().equals("") || especializationP.isActivated() || licenseP.getText().equals("") || passwordP.getText().equals("")) {
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-        }else {
+        }
+        else {
             verifyLicense();
         }
     }
@@ -94,68 +100,10 @@ public class RegisterProfessionalActivity extends AppCompatActivity {
     private void verifyLicense(){
         String licensePContent = licenseP.getText().toString().trim();
         if (licensePContent.equals("MD-123456")) {
-            registerProfessional();
+            authManager.registerProfessional(this, emailP, passwordP, nameP, cpfP, phoneP, selectedEspecialization, licenseP);
         }else{
             Toast.makeText(this, "Licença Inválida", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void registerProfessional(){
-        String editEmailContent = emailP.getText().toString().trim();
-        String editPasswordContent = passwordP.getText().toString().trim();
-        auth.createUserWithEmailAndPassword(editEmailContent, editPasswordContent).addOnCompleteListener(cadastro ->{
-            if(cadastro.isSuccessful()){
-                saveData();
-                Toast.makeText(RegisterProfessionalActivity.this,"Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
-                Intent intentM = new Intent(this, ProfessionalHomeActivity.class);
-                startActivity(intentM);
-                finish();
-            }else{
-                String erro;
-                try{
-                    throw cadastro.getException();
-                } catch (FirebaseAuthWeakPasswordException e){
-                    erro = "Digite uma senha com no minimo 6 caracteres";
-                    Toast.makeText(RegisterProfessionalActivity.this, erro, Toast.LENGTH_SHORT).show();
-                } catch (FirebaseAuthUserCollisionException e){
-                    erro = "essa conta ja foi cadastrada";
-                    Toast.makeText(RegisterProfessionalActivity.this,erro, Toast.LENGTH_SHORT).show();
-                } catch (FirebaseAuthInvalidCredentialsException e){
-                    erro = "email invalido";
-                    Toast.makeText(RegisterProfessionalActivity.this,erro, Toast.LENGTH_SHORT).show();
-                }
-                catch (Exception e) {
-                    erro = "erro ao cadastrar usuario";
-                    Toast.makeText(RegisterProfessionalActivity.this,erro, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }
-
-    private void saveData(){
-        String editNomeContent = nameP.getText().toString().trim();
-        String editEmailContent = emailP.getText().toString().trim();
-        String editPasswordContent = passwordP.getText().toString().trim();
-        String editPhoneContent = phoneP.getText().toString().trim();
-        String editEspecializationContent = especializacaoSelecionada;
-        String editLicenseContent = licenseP.getText().toString().trim();
-        int role = 2;
-
-        Map<String,Object> professionals = new HashMap<>();
-        professionals.put("name",editNomeContent);
-        professionals.put("email",editEmailContent);
-        professionals.put("phone", editPhoneContent);
-        professionals.put("especialization", editEspecializationContent);
-        professionals.put("license", editLicenseContent);
-        professionals.put("role", role);
-
-
-        String professionalID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        DocumentReference documentReference = firestore.collection("Users").document(professionalID);
-        documentReference.set(professionals);
-
     }
 
     @Override

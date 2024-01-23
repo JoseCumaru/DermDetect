@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradiente_blue"
+    style="@style/background"
     tools:context=".auth.RecoverActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,23 +49,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/email"
-                    android:textColor="@color/black"/>
+                    style="@style/text"/>
 
                 <EditText
-                    android:id="@+id/editEmail"
+                    android:id="@+id/editEmailR"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:hint="email@email.com.br"/>
 
                 <Button
-                    android:id="@+id/btnLogin"
+                    android:id="@+id/btnEnviar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:text="Enviar"
-                    android:textColor="@color/secundary_blue"
-                    android:backgroundTint="@color/black"/>
+                    style="@style/button"
+
+                    />
 
             </LinearLayout>
 

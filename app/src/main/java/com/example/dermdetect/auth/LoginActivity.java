@@ -91,15 +91,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public Task<Integer> verifyUserType(String userID) {
-        // Construa a referência ao documento do usuário com base no ID de usuário
+        // Constroi a referência ao documento do usuário com base no ID de usuário
         DocumentReference userRef = db.collection("Users").document(userID);
 
-        // Realize uma consulta para obter o valor do campo "role" no documento do usuário
+        // Realiza uma consulta para obter o valor do campo "role" no documento do usuário
         return userRef.get().continueWith(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    // Obtenha o valor do campo "role" como um inteiro
+                    // Obtem o valor do campo "role" como um inteiro
                     Integer role = document.getLong("role").intValue();
                     return role;
                 }
@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(intentPH);
                                     finish();
                                 } else {
-                                    // Lide com outros valores de userRole de acordo com a lógica do seu aplicativo
+                                    // Lida com outros valores de userRole de acordo com a lógica do seu aplicativo
                                 }
                             } else {
                                 // userRole é null, lide com isso de acordo com a lógica do seu aplicativo

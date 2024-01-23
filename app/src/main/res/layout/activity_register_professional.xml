@@ -9,7 +9,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:id="@+id/LinearImg"
@@ -17,7 +21,10 @@
             android:layout_height="wrap_content"
             android:padding="32dp"
             android:orientation="vertical"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/LinearData1">
 
             <ImageView
                 android:layout_width="124dp"
@@ -31,124 +38,155 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:padding="8dp"
-            app:layout_constraintTop_toTopOf="parent"
             android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/LinearImg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/LinearBtnRegister">
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <LinearLayout
+                    android:id="@+id/LinearData"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/complete_name"
+                        android:textSize="16sp"
+                        style="@style/text"/>
+
+                    <EditText
+                        android:id="@+id/editNomeP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="seu nome"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/email"
+                        android:textSize="16sp"
+                        style="@style/text"/>
+
+
+                    <EditText
+                        android:id="@+id/editEmailP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:hint="email@email.com"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/password"
+                        android:textSize="16sp"
+                        style="@style/text"/>
+
+                    <EditText
+                        android:id="@+id/editPasswordP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="*********"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Cpf"
+                        android:textSize="16sp"
+                        style="@style/text"/>
+
+                    <EditText
+                        android:id="@+id/editCpf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="ex: 000.000.000-00"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Telefone para contato"
+                        android:textSize="16sp"
+                        style="@style/text"/>
+
+                    <EditText
+                        android:id="@+id/editContactPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:hint="ex: (00) 00000-0000"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Especializaçao"
+                        android:textSize="16sp"
+                        style="@style/text"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerEspecializationP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:inputType="text" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Licença Profissional"
+                        android:textSize="16sp"
+                        style="@style/text"/>
+
+                    <EditText
+                        android:id="@+id/editLicenseP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapCharacters"
+                        android:hint="ex: MD-123456"/>
+
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearBtnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <LinearLayout
-                android:id="@+id/LinearData"
+            <Button
+                android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:layout_gravity="bottom"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/complete_name"
-                    android:textSize="16sp"
-                    style="@style/text"/>
-
-                <EditText
-                    android:id="@+id/editNomeP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="seu nome"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/email"
-                    android:textSize="16sp"
-                    style="@style/text"/>
-
-
-                <EditText
-                    android:id="@+id/editEmailP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="email@email.com"/>
-
-                <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Telefone para contato"
-                android:textSize="16sp"
-                style="@style/text"/>
-
-                <EditText
-                    android:id="@+id/editContactPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:hint="ex: (00) 00000-0000"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Especializaçao"
-                    android:textSize="16sp"
-                    style="@style/text"/>
-
-                <Spinner
-                    android:id="@+id/spinnerEspecializationP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:inputType="text" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Licença Profissional"
-                    android:textSize="16sp"
-                    style="@style/text"/>
-
-                <EditText
-                    android:id="@+id/editLicenseP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textCapCharacters"
-                    android:hint="ex: MD-123456"/>
-
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/password"
-                    android:textSize="16sp"
-                    style="@style/text"/>
-
-                <EditText
-                    android:id="@+id/editPasswordP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:hint="*********"
-                    />
-
-                <Button
-                    android:id="@+id/btnRegister"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Registrar"
-                    style="@style/button"
-                    />
-
-            </LinearLayout>
+                android:layout_marginBottom="12dp"
+                android:text="Registrar"
+                style="@style/button" />
 
         </LinearLayout>
 
