@@ -31,6 +31,7 @@
                 android:layout_width="124dp"
                 android:layout_height="124dp"
                 android:src="@drawable/ic_person"
+                style="@style/ic_person"
                 android:layout_gravity="center_horizontal"/>
         </LinearLayout>
 
@@ -44,7 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/LinearImg"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/LinearBtnRegister"
                 tools:ignore="UselessParent">
 
                 <TextView
@@ -135,15 +136,25 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <Button
-                    android:id="@+id/btnRegister"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="Registrar"
-                    style="@style/button"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/LinearBtnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
 
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:text="Registrar"
+                android:background="@drawable/bg_button"
+                style="@style/button" />
 
         </LinearLayout>
 

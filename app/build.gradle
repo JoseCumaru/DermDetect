@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.example.dermdetect'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.dermdetect"
         minSdk 29
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -42,7 +42,10 @@ dependencies {
     def view_model_fragment_version = "1.5.7"
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.5.0'
+
+    //implementation 'com.google.android.material:material:1.5.0' funcionando
+    implementation 'com.google.android.material:material:1.11.0'
+
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
     implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'

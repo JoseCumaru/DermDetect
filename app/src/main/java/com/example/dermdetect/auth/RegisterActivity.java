@@ -56,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity {
         goToRegisterP = findViewById(R.id.textRegisterP);
         spinnerState = findViewById(R.id.spinnerEstate);
         spinnerCity = findViewById(R.id.spinnerCity);
-
         authManager = new AuthManager();
     }
 
@@ -144,13 +143,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void checkData(){
-        if(editName.getText().equals("") && editEmail.getText().equals("") && editPassword.getText().equals("")){
+        if(editName.getText().toString().trim().equals("") && editEmail.getText().toString().trim().equals("") && editPassword.getText().toString().trim().equals("")){
             Toast.makeText(RegisterActivity.this, "Insira seus dados", Toast.LENGTH_SHORT).show();
-        }else if(editName.getText().equals("")){
+        }else if(editName.getText().toString().trim().equals("")){
             Toast.makeText(RegisterActivity.this, "Insira seu nome", Toast.LENGTH_SHORT).show();
-        } else if(editEmail.getText().equals("")){
+        } else if(editEmail.getText().toString().trim().equals("")){
             Toast.makeText(RegisterActivity.this, "Insira seu email", Toast.LENGTH_SHORT).show();
-        } else if (editPassword.getText().equals("")) {
+        } else if (editPassword.getText().toString().trim().equals("")) {
             Toast.makeText(RegisterActivity.this, "Insira sua senha", Toast.LENGTH_SHORT).show();
         }else{
             authManager.registerUser(RegisterActivity.this, spinnerStateContent, spinnerCityContent, editEmail, editPassword, editName);

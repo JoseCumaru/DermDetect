@@ -1,11 +1,8 @@
 package com.example.dermdetect.ui;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -24,25 +21,19 @@ import android.widget.Toast;
 
 import com.example.dermdetect.R;
 import com.example.dermdetect.auth.LoginActivity;
-import com.example.dermdetect.viewmodels.HistoryItem;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class SetingsActivity extends AppCompatActivity {
 
@@ -66,7 +57,7 @@ public class SetingsActivity extends AppCompatActivity {
         initializeComponents();
         setImgPerfil();
         initializeClicks();
-        setNightMode();
+        //setNightMode();
 
 
 
@@ -100,7 +91,7 @@ public class SetingsActivity extends AppCompatActivity {
         });
     }
 
-    private void setNightMode(){
+    /*private void setNightMode(){
 
         //usa-se SharedPreferences para salvar o modo se sair do app
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
@@ -129,7 +120,7 @@ public class SetingsActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     @Override
     protected void onStart() {
@@ -193,6 +184,13 @@ public class SetingsActivity extends AppCompatActivity {
                 auth.signOut();
                 Intent intentL = new Intent(SetingsActivity.this, LoginActivity.class);
                 startActivity(intentL);
+                // Finaliza a HomeActivity (se existir)
+
+                HomeActivity homeActivity = HomeActivity.getInstance();
+                    homeActivity.finish();
+
+
+                finish();
             }
         });
 
@@ -204,6 +202,8 @@ public class SetingsActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -295,5 +295,6 @@ public class SetingsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        finish();
     }
 }

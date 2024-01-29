@@ -36,10 +36,9 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkNightMode();
+        //checkNightMode();
         setContentView(R.layout.activity_splash);
         db = FirebaseFirestore.getInstance();
-
         timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -55,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private void checkNightMode(){
+    /*private void checkNightMode(){
         // Recupera o estado do modo claro/escuro
         SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         boolean isNightMode = sharedPreferences.getBoolean("night", false);
@@ -64,7 +63,7 @@ public class SplashActivity extends AppCompatActivity {
         if (isNightMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
-    }
+    }*/
 
     public void checkAuth() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();

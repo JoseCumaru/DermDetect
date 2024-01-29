@@ -24,6 +24,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
 
     TextView textRegister, textRecover;
@@ -31,6 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     Button buttonLogin;
     private FirebaseAuth auth;
     private FirebaseFirestore db;
+
+    private static final int BACK_PRESS_INTERVAL = 2000; // Intervalo em milissegundos
+    private long backPressTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +79,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentR = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intentR);
-
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressTime + BACK_PRESS_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        } else {
+            Toast.makeText(this, "Pressione novamente para sair", Toast.LENGTH_SHORT).show();
+        }
+        backPressTime = System.currentTimeMillis();
     }
 
     private void checkData(){
@@ -109,14 +124,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     private void signInUser(){
         String editEmailContent = editEmail.getText().toString().trim();
         String editPasswordContent = editPassword.getText().toString().trim();
         auth.signInWithEmailAndPassword(editEmailContent, editPasswordContent).addOnCompleteListener(autenticacao ->{
             //FirebaseUser currentUser = auth.getCurrentUser();
             if(autenticacao.isSuccessful()){
-                String userId = auth.getCurrentUser().getUid();
+                String userId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
                 Task<Integer> roleTask = verifyUserType(userId);
                 roleTask.addOnCompleteListener(new OnCompleteListener<Integer>() {
                     @Override

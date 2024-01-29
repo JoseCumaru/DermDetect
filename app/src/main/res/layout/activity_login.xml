@@ -30,6 +30,7 @@
                 android:layout_width="124dp"
                 android:layout_height="124dp"
                 android:src="@drawable/ic_person"
+                style="@style/ic_person"
                 android:layout_gravity="center_horizontal"/>
         </LinearLayout>
 
@@ -59,6 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/email"
+                    android:textSize="16sp"
                     style="@style/text" />
 
                 <EditText
@@ -73,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/password"
+                    android:textSize="16sp"
                     style="@style/text" />
 
                 <EditText
@@ -93,6 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Esqueceu a senha?"
+                        android:textSize="16sp"
                         style="@style/text"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints" />
@@ -102,22 +106,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Registrar"
+                        android:textSize="16sp"
                         style="@style/text"
                         app:layout_constraintEnd_toEndOf="parent"
                         tools:ignore="MissingConstraints" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <Button
-                    android:id="@+id/btnLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="Login"
-                    style="@style/button"
-                     />
-
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/LinearBtnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:text="Login"
+                android:background="@drawable/bg_button"
+                style="@style/button" />
 
         </LinearLayout>
 

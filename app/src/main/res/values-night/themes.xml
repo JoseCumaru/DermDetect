@@ -18,6 +18,12 @@
         <item name="android:background">@color/blue_fsc</item>
     </style>
 
+    <!-- Auth Activities -->
+
+    <style name="ic_person">
+        <item name="android:tint">@color/color_cinza</item>
+    </style>
+
     <!-- Settings Activity -->
 
 

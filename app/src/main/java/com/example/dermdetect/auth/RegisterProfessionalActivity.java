@@ -89,7 +89,7 @@ public class RegisterProfessionalActivity extends AppCompatActivity {
     }
 
     private void checkData(){
-        if (nameP.getText().equals("") || emailP.getText().equals("") || phoneP.getText().equals("") || especializationP.isActivated() || licenseP.getText().equals("") || passwordP.getText().equals("")) {
+        if (nameP.getText().toString().trim().equals("") || emailP.getText().toString().trim().equals("") || phoneP.getText().toString().trim().equals("") || especializationP.isActivated() || licenseP.getText().toString().trim().equals("") || passwordP.getText().toString().trim().equals("")) {
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
         }
         else {

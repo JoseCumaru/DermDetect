@@ -9,6 +9,7 @@ import android.Manifest;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -26,6 +27,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dermdetect.R;
 import com.example.dermdetect.ml.Model;
@@ -38,8 +40,11 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.zip.Deflater;
 
 public class HomeActivity extends AppCompatActivity {
+    @SuppressLint("StaticFieldLeak")
+    private static HomeActivity instance;
     TextView textInformation, result, toolbarTitle, about, zoom, confidence;
     Button predict;
     CardView linearImg;
@@ -54,6 +59,9 @@ public class HomeActivity extends AppCompatActivity {
     UserHistoryManager historyManager = new UserHistoryManager();
     ImageClassifier imageClassifier;
 
+    private static final int BACK_PRESS_INTERVAL = 2000; // Intervalo em milissegundos
+    private long backPressTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,8 @@ public class HomeActivity extends AppCompatActivity {
         initializeComponents();
         leftIcon.setVisibility(View.INVISIBLE);
         initializeClicks();
+
+        instance = this;
     }
 
     public void initializeComponents(){
@@ -270,6 +280,17 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (backPressTime + BACK_PRESS_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        } else {
+            Toast.makeText(this, "Pressione novamente para sair", Toast.LENGTH_SHORT).show();
+        }
+        backPressTime = System.currentTimeMillis();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
     }
@@ -277,5 +298,16 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (!isFinishing()) {
+            instance = null;
+        }
+    }
+    public static HomeActivity getInstance() {
+        return instance;
     }
 }
