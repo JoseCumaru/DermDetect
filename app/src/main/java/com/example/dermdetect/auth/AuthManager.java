@@ -34,6 +34,12 @@ public class AuthManager {
         return instance;
     }
 
+    public String getUserID(){
+        FirebaseUser currentUSer = FirebaseAuth.getInstance().getCurrentUser();
+        assert currentUSer != null;
+        return currentUSer.getUid();
+    }
+
     public void checkAuth(Context context) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {

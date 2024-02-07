@@ -46,8 +46,6 @@ public class QueryRequest {
         }
     }
 
-
-
     public String getUserID() {
         return userID;
     }

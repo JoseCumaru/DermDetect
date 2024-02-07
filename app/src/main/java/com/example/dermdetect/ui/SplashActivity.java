@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.dermdetect.R;
 import com.example.dermdetect.auth.AuthManager;
 import com.example.dermdetect.auth.LoginActivity;
+import com.example.dermdetect.viewmodels.FirestoreHelp;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,13 +33,13 @@ public class SplashActivity extends AppCompatActivity {
     TimerTask timerTask;
     private FirebaseFirestore db;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //checkNightMode();
         setContentView(R.layout.activity_splash);
         db = FirebaseFirestore.getInstance();
+
         timerTask = new TimerTask() {
             @Override
             public void run() {

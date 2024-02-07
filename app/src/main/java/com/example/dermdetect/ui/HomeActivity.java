@@ -6,10 +6,9 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.cardview.widget.CardView;
 
 import android.Manifest;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -23,6 +22,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -30,34 +31,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dermdetect.R;
-import com.example.dermdetect.ml.Model;
+import com.example.dermdetect.viewmodels.FirestoreHelp;
 import com.example.dermdetect.viewmodels.ImageClassifier;
 import com.example.dermdetect.viewmodels.UserHistoryManager;
 
-import org.tensorflow.lite.DataType;
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
-
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.zip.Deflater;
+
+import java.util.Objects;
+
 
 public class HomeActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     private static HomeActivity instance;
-    TextView textInformation, result, toolbarTitle, about, zoom, confidence;
+
+    TextView textInformation, result,toolbarTitle, about,zoom, confidence, textUserName;
     Button predict;
     CardView linearImg;
+    Animation fadeIn;
     ImageView camera, gallery, leftIcon, rightIcon, selectedImage;
     int imageSize = 256;
-    String classe;
     MenuBuilder.ItemInvoker itemConfig;
     private final Handler handler = new Handler();
     private boolean isLongPress = false;
     private boolean selected = false;
 
     UserHistoryManager historyManager = new UserHistoryManager();
+
     ImageClassifier imageClassifier;
+
+    FirestoreHelp firestoreHelp;
+
 
     private static final int BACK_PRESS_INTERVAL = 2000; // Intervalo em milissegundos
     private long backPressTime;
@@ -66,16 +69,25 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        firestoreHelp = new FirestoreHelp();
+
         imageClassifier = new ImageClassifier(getApplicationContext());
+
         initializeComponents();
-        leftIcon.setVisibility(View.INVISIBLE);
+
         initializeClicks();
 
         instance = this;
     }
 
+
     public void initializeComponents(){
+
+        textUserName = findViewById(R.id.textUserName);
+        firestoreHelp.getCurrentUserName(textUserName);
+
         leftIcon = findViewById(R.id.left_icon);
+        leftIcon.setVisibility(View.INVISIBLE);
         rightIcon = findViewById(R.id.right_icon);
         textInformation = findViewById(R.id.textInformacao);
         toolbarTitle = findViewById(R.id.toolbar_title);
@@ -90,7 +102,11 @@ public class HomeActivity extends AppCompatActivity {
         about = findViewById(R.id.textViewInformations);
         about.setVisibility(View.INVISIBLE);
         itemConfig = findViewById(R.id.item_config);
+        fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -129,6 +145,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent cameraIntent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(cameraIntent,2);
+
             }
         });
 
@@ -194,7 +211,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         // Lida com o clique no item de menu
-                        switch (item.getTitle().toString()) {
+                        switch (Objects.requireNonNull(item.getTitle()).toString()) {
                             case "Configurações":
                                 Intent intentS = new Intent(HomeActivity.this, SetingsActivity.class);
                                 startActivity(intentS);
@@ -241,9 +258,14 @@ public class HomeActivity extends AppCompatActivity {
                 about.setVisibility(View.INVISIBLE);
                 imageClassifier.setInferiu(false);
 
-                Bitmap image = (Bitmap) data.getExtras().get("data");
+                assert data != null;
+                Bitmap image = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
+                assert image != null;
                 int dimension = Math.min(image.getWidth(), image.getHeight());
                 image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
+
+                //Adiciona animação e seta imagem apos a foto
+                selectedImage.startAnimation(fadeIn);
                 selectedImage.setImageBitmap(image);
                 zoom.setText("Segure para dar zoom na imagem");
 
@@ -252,12 +274,12 @@ public class HomeActivity extends AppCompatActivity {
                 imageClassifier.predictImage(image, predict, result, confidence, about, historyManager);
 
             } else {
-
                 result.setText("");
                 confidence.setText("");
                 about.setVisibility(View.INVISIBLE);
                 imageClassifier.setInferiu(false);
 
+                assert data != null;
                 Uri dat = data.getData();
                 Bitmap image = null;
                 try {
@@ -265,10 +287,14 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                //Adiciona animação e seta imagem apos a seleção
+                selectedImage.startAnimation(fadeIn);
                 selectedImage.setImageBitmap(image);
                 zoom.setText("Segure para dar zoom na imagem");
-                confidence.setText("");
 
+
+                assert image != null;
                 image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
                 selected = true;
 
@@ -276,6 +302,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             super.onActivityResult(requestCode, resultCode, data);
+
         }
     }
 

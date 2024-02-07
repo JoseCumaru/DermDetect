@@ -1,12 +1,11 @@
 package com.example.dermdetect.viewmodels;
 
-import static java.security.AccessController.getContext;
-
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,9 +24,12 @@ public class ImageClassifier {
     private boolean inferiu = false;
     private final Context context;
     public static String classe;
+
+
     public ImageClassifier(Context context) {
         this.context = context;
     }
+
 
     public void setClasse(String classe){
         ImageClassifier.classe = classe;
@@ -44,6 +46,8 @@ public class ImageClassifier {
         return inferiu;
     }
 
+
+
     public void predictImage(Bitmap image, Button predictButton, TextView resultText, TextView confidenceText, TextView aboutText, UserHistoryManager historyManager) {
         predictButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +57,7 @@ public class ImageClassifier {
             }
         });
     }
+
 
     @SuppressLint("SetTextI18n")
     public void classifyImage(Bitmap image, TextView resultText, TextView confidenceText, TextView aboutText, UserHistoryManager historyManager) {
@@ -93,34 +98,8 @@ public class ImageClassifier {
 
             String[] classes = {"Acne", "Rosácea", "Impetigo", "Melasma", "Psoríase", "Micose", "Dermatite Atópica", "Melanoma"};
 
-            /*String[] classes = {
-                    "Acne and Rosacea Photos",
-                    "Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions",
-                    "Atopic Dermatitis Photos",
-                    "Bullous Disease Photos",
-                    "Cellulitis Impetigo and other Bacterial Infections",
-                    "Eczema Photos",
-                    "Exanthems and Drug Eruptions",
-                    "Hair Loss Photos Alopecia and other Hair Diseases",
-                    "Herpes HPV and other STDs Photos",
-                    "Light Diseases and Disorders of Pigmentation",
-                    "Lupus and other Connective Tissue diseases",
-                    "Melanoma Skin Cancer Nevi and Moles",
-                    "Nail Fungus and other Nail Disease",
-                    "Poison Ivy Photos and other Contact Dermatitis",
-                    "Psoriasis pictures Lichen Planus and related diseases",
-                    "Scabies Lyme Disease and other Infestations and Bites",
-                    "Seborrheic Keratoses and other Benign Tumors",
-                    "Systemic Disease",
-                    "Tinea Ringworm Candidiasis and other Fungal Infections",
-                    "Urticaria Hives",
-                    "Vascular Tumors",
-                    "Vasculitis Photos",
-                    "Warts Molluscum and other Viral Infections"
-            };*/
-
             // Valor mínimo para se considerar doença
-            double confidenceThreshold = 0.65;
+            double confidenceThreshold = 0.75;
 
             //Possivel doença encontrada
             if (maxConfidence >= confidenceThreshold) {
@@ -131,7 +110,7 @@ public class ImageClassifier {
                 aboutText.setText("Informações>");
 
                 // Salva no histórico
-                historyManager.addToHistory(image, classes[maxPos], maxConfidence);
+                //historyManager.addToHistory(image, classes[maxPos], maxConfidence);
 
             }else{
                 noDiseaseFound(resultText);
@@ -164,6 +143,7 @@ public class ImageClassifier {
         about.setText("Informações >");
         about.setVisibility(View.VISIBLE);
     }
+
 
     @SuppressLint("SetTextI18n")
     public void noDiseaseFound(TextView textView){

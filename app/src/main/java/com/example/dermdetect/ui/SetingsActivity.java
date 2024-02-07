@@ -1,8 +1,11 @@
 package com.example.dermdetect.ui;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.dermdetect.R;
 import com.example.dermdetect.auth.LoginActivity;
+import com.example.dermdetect.viewmodels.FirestoreHelp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -38,6 +42,7 @@ import java.util.Map;
 public class SetingsActivity extends AppCompatActivity {
 
     TextView textNomeUser, textEditPerfil, textProblem, textAppearance, textPrivacy, textSupport, textSignOut;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch switcher;
     Boolean nightMode;
     SharedPreferences sharedPreferences;
@@ -47,51 +52,25 @@ public class SetingsActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseFirestore firestore;
 
+    FirestoreHelp firestoreHelp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setings);
-        auth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
+        firestoreHelp = new FirestoreHelp();
 
         initializeComponents();
-        setImgPerfil();
+
+        //setImgPerfil();
         initializeClicks();
-        //setNightMode();
-
-
+        setNightMode();
 
     }
 
-    private void setImgPerfil(){
-        String userId = auth.getCurrentUser().getUid();
-        DocumentReference documentReference = firestore.collection("Users").document(userId);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                if (documentSnapshot != null) {
-                    String imageBase64 = documentSnapshot.getString("imgperfil");
-                    String nameUser = documentSnapshot.getString("name");
-                    textNomeUser.setText(nameUser);
-                    if (imageBase64 != null && !imageBase64.isEmpty()) {
-                        Bitmap imageBitmap = decodeBase64ToBitmap(imageBase64);
-                        if (imageBitmap != null) {
-                            imgPerfil.setImageBitmap(imageBitmap);
-                        } else {
-                            Toast.makeText(SetingsActivity.this, "Erro ao decodificar imagem do perfil", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        //Toast.makeText(SetingsActivity.this, "Lembre-se de carregar um foto de perfil", Toast.LENGTH_SHORT).show();
 
-                    }
-                } else {
-                    Toast.makeText(SetingsActivity.this, "Erro ao buscar o documento: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
-    /*private void setNightMode(){
+    private void setNightMode(){
 
         //usa-se SharedPreferences para salvar o modo se sair do app
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
@@ -120,7 +99,7 @@ public class SetingsActivity extends AppCompatActivity {
             }
         });
 
-    }*/
+    }
 
     @Override
     protected void onStart() {
@@ -136,6 +115,9 @@ public class SetingsActivity extends AppCompatActivity {
         textNomeUser = findViewById(R.id.nameUser);
         switcher = findViewById(R.id.Switcher);
         imgPerfil =findViewById(R.id.imgPerfil);
+
+        firestoreHelp.getCurrentUserName(textNomeUser);
+        firestoreHelp.getCurrentUserImage(imgPerfil);
     }
 
     private void initializeClicks(){
@@ -216,7 +198,7 @@ public class SetingsActivity extends AppCompatActivity {
             try {
                 image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), dat);
             } catch (IOException e) {
-                // Lide com erros ao carregar a imagem
+                //  erros ao carregar a imagem
                 Toast.makeText(SetingsActivity.this, "Erro ao carregar a imagem: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -224,7 +206,7 @@ public class SetingsActivity extends AppCompatActivity {
             if (image != null) {
                 imgPerfil.setImageBitmap(image);
 
-                // Converter a imagem em um array de bytes (byte[])
+                // Converte a imagem em um array de bytes (byte[])
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] imageData = baos.toByteArray();
@@ -237,30 +219,30 @@ public class SetingsActivity extends AppCompatActivity {
                 String base64ImageData = Base64.encodeToString(imageData, Base64.DEFAULT);
 
 
-                // Salvar a imagem no Firestore e atualizar o campo imgperfil
+                // Salva a imagem no Firestore e atualiza o campo imgperfil
                 String userID = auth.getCurrentUser().getUid();
                 firestore = FirebaseFirestore.getInstance();
                 DocumentReference userRef = firestore.collection("Users").document(userID);
 
-                // Primeiro, verifique se o documento do usuário existe
+                // Primeiro, verifica se o documento do usuário existe
                 userRef.get()
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 if (!task.getResult().exists()) {
-                                    // O documento do usuário não existe, então vamos criá-lo
+                                    // se nao existir, cria
                                     Map<String, Object> userData = new HashMap<>();
                                     userData.put("imgperfil", base64ImageData);
                                     userRef.set(userData)
                                             .addOnSuccessListener(aVoid -> {
                                                 // Documento do usuário criado com sucesso
-                                                // Agora, podemos atualizar o campo "imgperfil"
+
                                                 userRef.update("imgperfil", base64ImageData)
                                                         .addOnSuccessListener(aVoid2 -> {
                                                             // Sucesso, a imagem foi salva no Firestore
                                                             Toast.makeText(SetingsActivity.this, "Imagem de perfil salva com sucesso", Toast.LENGTH_SHORT).show();
                                                         })
                                                         .addOnFailureListener(e2 -> {
-                                                            // Lidar com erros ao salvar a imagem
+                                                            // erros ao salvar a imagem
                                                             Toast.makeText(SetingsActivity.this, "Erro ao salvar imagem de perfil: " + e2.getMessage(), Toast.LENGTH_SHORT).show();
                                                         });
                                             })
@@ -269,7 +251,7 @@ public class SetingsActivity extends AppCompatActivity {
                                                 Toast.makeText(SetingsActivity.this, "Erro ao criar documento do usuário: " + e1.getMessage(), Toast.LENGTH_SHORT).show();
                                             });
                                 } else {
-                                    // O documento do usuário já existe, então apenas atualize o campo "imgperfil"
+                                    // O documento do usuário já existe, então apenas atualiza o campo "imgperfil"
                                     userRef.update("imgperfil", base64ImageData)
                                             .addOnSuccessListener(aVoid -> {
                                                 // Sucesso, a imagem foi salva no Firestore

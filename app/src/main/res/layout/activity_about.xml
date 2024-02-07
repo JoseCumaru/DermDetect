@@ -168,7 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="O usuário fornece por meio da câmera do dispositivo ou selecionando uma imagem da galeria. Esta imagem é a entrada que será processada pela rede neural para determinar a possível doença de pele."
+                    android:text="Você fornece por meio da câmera do dispositivo ou selecionando uma imagem da galeria. Esta imagem é a entrada que será processada pela rede neural para determinar a possível doença de pele."
                     style="@style/text"
                     android:textSize="16sp" />
 
