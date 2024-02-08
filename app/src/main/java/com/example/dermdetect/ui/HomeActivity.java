@@ -31,16 +31,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dermdetect.R;
-import com.example.dermdetect.viewmodels.FirestoreHelp;
+
 import com.example.dermdetect.viewmodels.ImageClassifier;
+import com.example.dermdetect.viewmodels.User;
 import com.example.dermdetect.viewmodels.UserHistoryManager;
 
 import java.io.IOException;
 
 import java.util.Objects;
 
-
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity{
     @SuppressLint("StaticFieldLeak")
     private static HomeActivity instance;
 
@@ -59,8 +59,6 @@ public class HomeActivity extends AppCompatActivity {
 
     ImageClassifier imageClassifier;
 
-    FirestoreHelp firestoreHelp;
-
 
     private static final int BACK_PRESS_INTERVAL = 2000; // Intervalo em milissegundos
     private long backPressTime;
@@ -69,22 +67,20 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        firestoreHelp = new FirestoreHelp();
+        initializeComponents();
+        initializeClicks();
+        updateUIWithUserData();
 
         imageClassifier = new ImageClassifier(getApplicationContext());
 
-        initializeComponents();
-
-        initializeClicks();
-
         instance = this;
+
     }
 
 
     public void initializeComponents(){
 
         textUserName = findViewById(R.id.textUserName);
-        firestoreHelp.getCurrentUserName(textUserName);
 
         leftIcon = findViewById(R.id.left_icon);
         leftIcon.setVisibility(View.INVISIBLE);
@@ -104,6 +100,13 @@ public class HomeActivity extends AppCompatActivity {
         itemConfig = findViewById(R.id.item_config);
         fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
 
+    }
+
+    public void updateUIWithUserData() {
+        String userName = User.getInstance().getUserName();
+        if (userName != null) {
+            textUserName.setText(userName);
+        }
     }
 
 
@@ -320,6 +323,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        updateUIWithUserData();
     }
 
     @Override

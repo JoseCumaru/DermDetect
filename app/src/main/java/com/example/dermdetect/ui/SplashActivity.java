@@ -2,20 +2,19 @@ package com.example.dermdetect.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.dermdetect.R;
-import com.example.dermdetect.auth.AuthManager;
 import com.example.dermdetect.auth.LoginActivity;
 import com.example.dermdetect.viewmodels.FirestoreHelp;
+import com.example.dermdetect.viewmodels.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +23,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,6 +32,7 @@ public class SplashActivity extends AppCompatActivity {
     private final Timer timer = new Timer();
     TimerTask timerTask;
     private FirebaseFirestore db;
+    FirestoreHelp firestoreHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class SplashActivity extends AppCompatActivity {
         //checkNightMode();
         setContentView(R.layout.activity_splash);
         db = FirebaseFirestore.getInstance();
+        firestoreHelp = new FirestoreHelp();
 
         timerTask = new TimerTask() {
             @Override
@@ -51,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
                 });
             }
         };
-        timer.schedule(timerTask, 3000);
+        timer.schedule(timerTask, 3700);
 
     }
 
@@ -75,7 +77,8 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             //Coleta o ID do usuário
             String userID = currentUser.getUid();
-
+            firestoreHelp.setCurrentUserData(userID);
+            User.getInstance().setUserId(userID);
             //Verifica o tipo de usuario
             Task<Integer> roleTask = verifyUserType(userID);
 
@@ -86,6 +89,7 @@ public class SplashActivity extends AppCompatActivity {
                         Integer userRole = task.getResult();
                         if (userRole != null) {
                             if (userRole == 1) {
+
                                 Intent intentH = new Intent(SplashActivity.this, HomeActivity.class);
                                 startActivity(intentH);
                                 finish();
@@ -106,8 +110,8 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    //Metodo para verificar o tipo de usuário
     public Task<Integer> verifyUserType(String userID) {
-        // Constroi a referência ao documento do usuário com base no ID de usuário
         DocumentReference userRef = db.collection("Users").document(userID);
 
         // Realiza uma consulta para obter o valor do campo "role" no documento do usuário
@@ -115,12 +119,9 @@ public class SplashActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    // Obtem o valor do campo "role" como um inteiro
-                    Integer role = document.getLong("role").intValue();
-                    return role;
+                    return Objects.requireNonNull(document.getLong("role")).intValue();
                 }
             }
-            // Se o documento não existe ou ocorreu um erro, retorna null ou um valor padrão
             return null;
         });
     }

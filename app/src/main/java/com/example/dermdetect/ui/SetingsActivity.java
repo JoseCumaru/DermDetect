@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.dermdetect.R;
 import com.example.dermdetect.auth.LoginActivity;
 import com.example.dermdetect.viewmodels.FirestoreHelp;
+import com.example.dermdetect.viewmodels.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -52,17 +53,15 @@ public class SetingsActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseFirestore firestore;
 
-    FirestoreHelp firestoreHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setings);
-        firestoreHelp = new FirestoreHelp();
 
         initializeComponents();
 
-        //setImgPerfil();
+
         initializeClicks();
         setNightMode();
 
@@ -110,14 +109,20 @@ public class SetingsActivity extends AppCompatActivity {
 
     private void initializeComponents() {
         leftIcon = findViewById(R.id.left_icon);
-        rightIcon = findViewById(R.id.right_icon);
         textSignOut = findViewById(R.id.textSignOut);
         textNomeUser = findViewById(R.id.nameUser);
         switcher = findViewById(R.id.Switcher);
         imgPerfil =findViewById(R.id.imgPerfil);
+        updateUIWithUserData();
+    }
 
-        firestoreHelp.getCurrentUserName(textNomeUser);
-        firestoreHelp.getCurrentUserImage(imgPerfil);
+    public void updateUIWithUserData() {
+        String userName = User.getInstance().getUserName();
+        String imageBase64 = User.getInstance().getImageBase64();
+        if (userName != null) {
+            textNomeUser.setText(userName);
+            imgPerfil.setImageBitmap(decodeBase64ToBitmap(imageBase64));
+        }
     }
 
     private void initializeClicks(){
@@ -128,37 +133,6 @@ public class SetingsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        rightIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(SetingsActivity.this, rightIcon);
-                popupMenu.getMenuInflater().inflate(R.menu.menu_itens, popupMenu.getMenu());
-
-                // Configure um ouvinte de clique de item de menu
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        // Lide com o clique no item de menu aqui
-                        switch (item.getItemId()) {
-                            case 1:
-                                // Ação para o Item 1
-                                return true;
-                            case 2:
-                                // Ação para o Item 2
-                                return true;
-                            // Adicione mais casos conforme necessário
-                            case  3:
-                            default:
-                                return false;
-                        }
-                    }
-                });
-
-                // Exiba o menu
-                popupMenu.show();
-
-            }
-        });
 
         textSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,11 +140,9 @@ public class SetingsActivity extends AppCompatActivity {
                 auth.signOut();
                 Intent intentL = new Intent(SetingsActivity.this, LoginActivity.class);
                 startActivity(intentL);
-                // Finaliza a HomeActivity (se existir)
 
                 HomeActivity homeActivity = HomeActivity.getInstance();
-                    homeActivity.finish();
-
+                homeActivity.finish();
 
                 finish();
             }
@@ -220,7 +192,7 @@ public class SetingsActivity extends AppCompatActivity {
 
 
                 // Salva a imagem no Firestore e atualiza o campo imgperfil
-                String userID = auth.getCurrentUser().getUid();
+                String userID = User.getInstance().getUserId();
                 firestore = FirebaseFirestore.getInstance();
                 DocumentReference userRef = firestore.collection("Users").document(userID);
 
@@ -269,8 +241,8 @@ public class SetingsActivity extends AppCompatActivity {
         }
     }
 
-    private static Bitmap decodeBase64ToBitmap(String base64) {
-        byte[] decodedBytes = Base64.decode(base64, Base64.DEFAULT);
+    private static Bitmap decodeBase64ToBitmap(String imageBase64) {
+        byte[] decodedBytes = Base64.decode(imageBase64, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 

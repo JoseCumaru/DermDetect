@@ -7,12 +7,10 @@ import android.graphics.Bitmap;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.dermdetect.auth.AuthManager;
-import com.example.dermdetect.ui.SetingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,61 +22,40 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
 public class FirestoreHelp {
+
+
     AuthManager auth;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private static final FirestoreHelp instance = new FirestoreHelp();
-    public FirestoreHelp(){
-    }
+    public  FirestoreHelp(){}
     public static FirestoreHelp getInstance() {
         return instance;
     }
 
-    public void getCurrentUserName(TextView textView) {
-        auth = new AuthManager();
-        String userid = auth.getUserID();
 
-        DocumentReference documentReference = firestore.collection("Users").document(userid);
+    public void setCurrentUserData(String userID){
+
+        DocumentReference documentReference = firestore.collection("Users").document(userID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 if (documentSnapshot != null) {
-                    String nameUser = documentSnapshot.getString("name");
-                    textView.append(nameUser);
-                    //String imageBase64 = documentSnapshot.getString("imgperfil");
-                }
-            }
-        });
-    }
+                    String nameUser = Objects.requireNonNull(documentSnapshot.getString("name")).trim();
+                    User.getInstance().setUsername(nameUser);
 
-    public void getCurrentUserImage(ImageView imageView) {
-        auth = new AuthManager();
-        String userid = auth.getUserID();
-
-        DocumentReference documentReference = firestore.collection("Users").document(userid);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                if (documentSnapshot != null) {
                     String imageBase64 = documentSnapshot.getString("imgperfil");
-                    if (imageBase64 != null && !imageBase64.isEmpty()) {
-                        Bitmap imageBitmap = decodeBase64ToBitmap(imageBase64);
-                        if (imageBitmap != null) {
-                            imageView.setImageBitmap(imageBitmap);
-                        } else {
-                            //Toast.makeText(SetingsActivity.this, "Erro ao decodificar imagem do perfil", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                    User.getInstance().setImageBase64(imageBase64);
+
 
                 }
             }
+
         });
 
-
     }
-
 
 
     public void saveDataUser(EditText editName, EditText editEmail, EditText editPassword, String spinnerState, String spinnerCity){
